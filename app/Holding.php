@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Share extends Model
+class Holding extends Model
 {
-
     public $incrementing = false;
-    protected $fillable = ['code','value'];
+    protected $fillable = ['nickname','code','quantity'];
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSharesTable extends Migration
+class CreateLeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shares', function (Blueprint $table) {
-            $table->string('code');
-            $table->decimal('value',8,4);
+        Schema::create('leaders', function (Blueprint $table) {
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            $table->integer('place');
+            $table->decimal('trading_value',12,2);
+            $table->date('date');
             $table->timestamps();
 
-            $table->primary('code');
+            $table->primary('place');
         });
     }
 
@@ -29,6 +31,6 @@ class CreateSharesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shares');
+        Schema::dropIfExists('leaders');
     }
 }

@@ -8,5 +8,5 @@ class Share extends Model
 {
 
     public $incrementing = false;
-    protected $fillable = ['code','value'];
+    protected $fillable = ['code','name','value'];
 }

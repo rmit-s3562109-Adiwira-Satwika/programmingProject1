@@ -16,6 +16,7 @@ class CreateSharesTable extends Migration
         Schema::create('shares', function (Blueprint $table) {
             $table->string('code',3);
             $table->decimal('value',8,4);
+            $table->string('name');
             $table->timestamps();
 
             $table->primary('code');

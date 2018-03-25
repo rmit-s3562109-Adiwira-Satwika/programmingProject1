@@ -14,12 +14,14 @@ class CreateLeadersTable extends Migration
     public function up()
     {
         Schema::create('leaders', function (Blueprint $table) {
-            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            $table->string('nickname');
             $table->integer('place');
             $table->decimal('trading_value',12,2);
             $table->date('date');
             $table->timestamps();
 
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            
             $table->primary('place');
         });
     }

@@ -14,11 +14,14 @@ class CreateTradingAccountsTable extends Migration
     public function up()
     {
         Schema::create('trading_accounts', function (Blueprint $table) {
-            $table->string('nickname');
+            $table->string('nickname',32);
             $table->decimal('balance',12,2);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
+
+            $table->primary('nickname');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->index('nickname');
             $table->index('user_id');
         });

@@ -14,11 +14,12 @@ class CreateSharesTable extends Migration
     public function up()
     {
         Schema::create('shares', function (Blueprint $table) {
-            $table->string('code');
+            $table->string('code',3);
             $table->decimal('value',8,4);
             $table->timestamps();
 
             $table->primary('code');
+            $table->index('code');
         });
     }
 

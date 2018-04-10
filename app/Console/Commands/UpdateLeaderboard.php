@@ -58,7 +58,7 @@ class UpdateLeaderboard extends Command
      *
      * @return total value of account
      */
-    public function calculateValue($account)
+    private function calculateValue($account)
     {
         $total=0;
 
@@ -83,7 +83,7 @@ class UpdateLeaderboard extends Command
     *
     * @return none
     */
-    public function addToLeaderboard($nickname,$amount){
+    private function addToLeaderboard($nickname,$amount){
         //Get current leaderboard
         $leaders=Leaders::all()->orderBy('place');
 

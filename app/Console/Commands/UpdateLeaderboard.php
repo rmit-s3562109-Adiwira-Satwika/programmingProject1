@@ -40,9 +40,16 @@ class UpdateLeaderboard extends Command
     {
         //Get all trading accounts
         $accounts=TradingAccount::all();
+
+        //For each account check gains
         for ($accounts as $acc){
             $value=calculateValue($acc);
             $prevValue=StartingWorth::find($acc->nickname);
+            $gain=$value-$prevValue;
+
+            //Add to leaderboard if appropriate
+            addtoLeaderBoard($acc->nickname,$gain);
+
         }
     }
 
@@ -83,6 +90,11 @@ class UpdateLeaderboard extends Command
         //Set defaults
         $insert=true;
         $location=-1;
+
+        //Set insert position as first if no leaders present
+        if(empty($leaders)){
+            $location=1;
+        }
 
         //Iterate through leaders
         for($leaders as $lead){

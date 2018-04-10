@@ -42,7 +42,7 @@ class UpdateLeaderboard extends Command
         $accounts=TradingAccount::all();
 
         //For each account check gains
-        for ($accounts as $acc){
+        foreach ($accounts as $acc){
             $value=calculateValue($acc);
             $prevValue=StartingWorth::find($acc->nickname);
             $gain=$value-$prevValue;
@@ -66,10 +66,10 @@ class UpdateLeaderboard extends Command
         $total=$total+$account->balance;
 
         //Retrieve all holdings
-        $holdings=Holding::find('nickname'=>$nickname);
+        $holdings=Holding::find('nickname',$nickname);
 
         //Add value of each holding to total
-        for($holdings as $hold){
+        foreach($holdings as $hold){
             $total=$total+($hold->value*$hold->amount);
         }
 
@@ -97,7 +97,7 @@ class UpdateLeaderboard extends Command
         }
 
         //Iterate through leaders
-        for($leaders as $lead){
+        foreach($leaders as $lead){
             //If $amount is higher than value of this leader
             if($lead->trading_value<$amount){
                 //Set insert location
@@ -108,7 +108,7 @@ class UpdateLeaderboard extends Command
                 //Move leader down leaderboard
                 else{
                     //Remove if last entry
-                    if($lead->place==MAX_LEADERS{
+                    if($lead->place==MAX_LEADERS){
                         $lead->delete();
                     }
                     else{
@@ -119,10 +119,10 @@ class UpdateLeaderboard extends Command
             }
             //Insert new leader into appropriate place if found
             if($location!=-1){
-                $new=new Leader;
+                $new = new Leader;
                 $new->nickname=$nickname;
                 $new->trading_value=$amount;
-                $new->date=date('Y-m-d')
+                $new->date=date('Y-m-d');
                 $new->save();
             }
         }

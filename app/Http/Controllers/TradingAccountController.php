@@ -70,4 +70,18 @@ class TradingAccountController extends Controller
     	}
     	return true;
     }
+
+    //Transfer funds between trading account (potentially different users)
+    public static function transferFunds($sender,$receiver,$amount){
+    	//Check if sufficient funds if so reduce sender balance
+    	if(removeFunds($sender,$amount)){
+    		//Add transferred funds to receiver
+    		addFunds($receiver,$amount);
+
+    		//Return success indicator
+    		return true;
+    	}
+    	//Return false if insufficient funds thus transfer fails
+    	return false;
+    }
 }

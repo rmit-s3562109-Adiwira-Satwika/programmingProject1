@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
+
+    return view('welcome');
+    //return $lists;
+});
+
+Route::get('/home', function () {
     $lists = ShareMarketGame\Share::all();
 
-    return view('dashboard.dashboard', compact('lists'));
+    return view('home', compact('lists'));
     //return $lists;
 });
 

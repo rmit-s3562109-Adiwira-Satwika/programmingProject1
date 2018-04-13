@@ -30,8 +30,8 @@
                   <td>{{$list->code}}</td>
                   <td>{{$list->name}}</td>
                   <td>
-                    <a href='/Dashboard/{{$list->code}}'>
-                    ${{$list->value}}
+                    <a href='/dashboard/{{ $list->code }}'>
+                    ${{ $list->value }}
                 </a>
                 </td>
                 </tr>

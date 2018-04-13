@@ -12,12 +12,24 @@
 */
 
 Route::get('/', function () {
-    $lists = App\Share::all();
 
-    return view('dashboard', compact('lists'));
+    return view('welcome');
     //return $lists;
+});
+
+Route::get('/home', function () {
+    $lists = ShareMarketGame\Share::all();
+
+    return view('home', compact('lists'));
+    //return $lists;
+});
+
+Route::get('/dashboard/{code}', function ($code) {
+    $list = DB::table('shares')->where('code',$code)->first();
+
+    return view('dashboard.show', compact('list'));
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

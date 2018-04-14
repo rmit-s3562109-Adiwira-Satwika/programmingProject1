@@ -14,7 +14,7 @@
 Route::get('/', function () {
 
     return view('welcome');
-<<<<<<< HEAD
+
     //return $lists;
 });
 
@@ -32,27 +32,3 @@ Route::get('/dashboard/{code}', function ($code) {
 });
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
-=======
-
-});
-
-Route::get('/dashboard', function () {
-    $lists = ShareMarketGame\Share::all();
-
-    return view('dashboard.dashboard', compact('lists'));
-
-});
-
-
-Route::get('/dashboard/{code}', function ($code) {
-    
-    $list = DB::table('shares')->where('code',$code)->first();
-
-    return view('dashboard.show', compact('list'));
-
-});
-
-Auth::routes();
->>>>>>> adding viewing stock functionality

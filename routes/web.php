@@ -14,6 +14,7 @@
 Route::get('/', function () {
 
     return view('welcome');
+
     //return $lists;
 });
 
@@ -24,12 +25,20 @@ Route::get('/home', function () {
     //return $lists;
 });
 
-Route::get('/dashboard/{code}', function ($code) {
-    $list = DB::table('shares')->where('code',$code)->first();
+Route::get('/search', function () {
+    $lists = ShareMarketGame\Share::all();
 
-    return view('dashboard.show', compact('list'));
+    return view('dashboard.search', compact('lists'));
+    //return $lists;
 });
 
-Auth::routes();
+Route::get('/dashboard/{code}', function ($code) {
+    $list = DB::table('shares')->where('code',$code)->first();
+    $stock = ShareMarketGame\Holding::all();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+    return view('dashboard.show', compact('list','stock'));
+});
+
+Route::post('/buy', 'HoldingController@buyShares');
+
+Auth::routes();

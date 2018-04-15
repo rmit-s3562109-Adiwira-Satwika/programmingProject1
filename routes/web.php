@@ -25,6 +25,13 @@ Route::get('/home', function () {
     //return $lists;
 });
 
+Route::get('/search', function () {
+    $lists = ShareMarketGame\Share::all();
+
+    return view('dashboard.search', compact('lists'));
+    //return $lists;
+});
+
 Route::get('/dashboard/{code}', function ($code) {
     $list = DB::table('shares')->where('code',$code)->first();
     $stock = ShareMarketGame\Holding::all();

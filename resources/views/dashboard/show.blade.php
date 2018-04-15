@@ -1,104 +1,43 @@
 <!doctype html>
 <html lang="en">
-<<<<<<< HEAD
+@extends('layouts.app')
 
+@section('content')
 <body>
+  <div class="container">
+    <div class="row justify-content-center">
       <main >
 
       <div >
-        	<h1>Stock Details for: {{ $list->code }} - {{ $list->name }} </h1>
-        <p>Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-=======
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Action Page</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-  </head>
-
-<body>
-	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Stock Market</a>
-      <!-- search functionality
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3"> -->
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            
-            <ul class="nav flex-column">
-              
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Introduction
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Transaction
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Players Profile
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Leaderboard
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Game Tutorial
-                </a>
-              </li>
-
-            </ul>
-          </div>
-        </nav>
-
-      <main role="main" class="container">
-
-      <div class="starter-template">
-        	<h1>Stock Details for: {{ $list->code}} - {{ $list->name}}</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
->>>>>>> adding viewing stock functionality
+          <h1>Stock Details for: {{ $list->code }} - {{ $list->name }} </h1>
+        <p>You currently owned # amount in this stock</p>
       </div>
 
+<form method="POST" action="/buy">
+  @csrf
+
+      <div class="form-group">
+          <label for="name">nickname</label>
+          <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+      </div>
+
+      <div class="form-group">
+          <label for="code">Stock code</label>
+          <input type="text" class="form-control" id="code" name="code" value="{{ $list->code }}">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Unit to buy:</label>
+        <input type="number" class="form-control" id="amount" name="amount">
+      </div>
+
+      <button class="btn btn-primary" type="submit">Buy</button>
+
+</form>
+
     </main>
+</div>
+</div>
 </body>
 </html>
+@endsection

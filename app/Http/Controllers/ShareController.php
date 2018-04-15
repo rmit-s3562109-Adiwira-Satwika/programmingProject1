@@ -8,6 +8,9 @@ class ShareController extends Controller
 {
 	//Get array of all tracked shares
 	public function getAllShares(){
-		return Share::orderBy('code')->get();
+		//return Share::orderBy('code')->get();
+		 $lists = ShareMarketGame\Share::all();
+
+    	return view('home', compact('lists'));
 	}
 }

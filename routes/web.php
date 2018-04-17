@@ -25,6 +25,33 @@ Route::get('/home', function () {
     //return $lists;
 });
 
+Route::get('/nickname', function () {
+   
+    return view('nickname', compact('lists'));
+    //return $lists;
+});
+
+Route::get('/reg-tradeaccount', function () {
+    $lists = ShareMarketGame\Share::all();
+
+    return view('tradeAccount', compact('lists'));
+    //return $lists;
+});
+
+Route::get('/general-settings', function () {
+    $lists = ShareMarketGame\Share::all();
+
+    return view('settings', compact('lists'));
+    //return $lists;
+});
+
+Route::get('/transfer', function () {
+    $lists = ShareMarketGame\Share::all();
+
+    return view('transfer', compact('lists'));
+    //return $lists;
+});
+
 Route::get('/search', function () {
     $lists = ShareMarketGame\Share::all();
 

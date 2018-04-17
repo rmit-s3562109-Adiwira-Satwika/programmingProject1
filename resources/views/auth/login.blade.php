@@ -25,12 +25,6 @@
         width: 100%;
         height: 100vh;
     }
-
-    .container {
-        position: fixed;
-        top: 30%;
-        left: 28%;
-    }
 </style>​
 @section('content')
 <div class="container2">

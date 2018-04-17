@@ -69,8 +69,7 @@
 
             .content {
                 position: fixed;
-                top: 40%;
-                left: 25%;
+                top: 50%;
                 text-align: center;
             }
 

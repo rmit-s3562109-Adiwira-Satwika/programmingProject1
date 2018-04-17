@@ -9,15 +9,19 @@ class ShareController extends Controller
 	//Get array of all tracked shares
 	public function getAllShares(){
 		return Share::orderBy('code')->get();
+
+    	return view('home', compact('lists'));
 	}
 
 	//Find share by code
-	public function getByCode($search){
+	public function getByCode(Request $request){
+		$search=$request->input('search');
 		return Share::where('code', 'LIKE', '%'.$search.'%')->get();
 	}
 
 	//Find share by name
-	public function getByName($search){
+	public function getByName(Request $request){
+		$search=$request->input('search');
 		return Share::where('name', 'LIKE', '%'.$search.'%')->get();
 	}
 
@@ -29,6 +33,10 @@ class ShareController extends Controller
 	*	@return Returns false on invalid input otherwise returns array of values
 	*/
 	public function requestShareData($code,$timeSeries,$time,$limit){
+		$code=$request->input('code');
+		$timeSeries=$request->input('timerSeries');
+		$time=$request->input('time');
+		$limit=$request->input('limit');
 
 		//Check for valid time series
 		if($timeSeries!="INTRADAY"||$timeSeries!="DAILY"||$timeSeries!="WEEKLY"||$timeSeries!="MONTHLY"){

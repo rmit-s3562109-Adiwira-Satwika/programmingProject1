@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 class HoldingController extends Controller
 {
     //Purchase shares
-    public function buyShares($name,$code,$amount){
+    public function buyShares(Request $request){
+        $name=$request->input('name');
+        $code=$request->input('code');
+        $amount=$request->input('amount');
     	//Retrieve cost of shares
     	$cost=(Share::find($code)->value)*$amount;
 
@@ -23,6 +26,9 @@ class HoldingController extends Controller
 
     		//Save to database
     		$hold->save();
+            
+            //redirect to the home page
+            return redirect('/home');
 
             //Record transaction
             $trans = new Transaction();
@@ -38,7 +44,10 @@ class HoldingController extends Controller
     }
 
 
-    public function sellShares($name,$code,$amount){
+    public function sellShares(Request $request){
+        $name=$request->input('name');
+        $code=$request->input('code');
+        $amount=$request->input('amount');
     	//Retrieve user holding
     	$hold=Holding::find($name,$code)
 

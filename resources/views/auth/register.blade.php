@@ -25,11 +25,6 @@
         height: 100vh;
     }
 
-    .container {
-        position: fixed;
-        top: 30%;
-        left: 28%;
-    }
 </style>​
 @extends('layouts.app')
 
@@ -95,49 +90,7 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
-
-                                    <div class="col-md-6">
-                                        <select>
-                                            <option value="1">18 - 24</option>
-                                            <option value="2">25 - 34</option>
-                                            <option value="3">35 - 44</option>
-                                            <option value="4">45 - 54</option>
-                                            <option value="5">55 - 64</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
-
-                                    <div class="col-md-6">
-                                        <select>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Location" class="col-md-4 col-form-label text-md-right">{{ __('Location') }}</label>
-
-                                    <div class="col-md-6">
-                                        <select>
-                                            <option value="nsw">New South Wales</option>
-                                            <option value="qld">Queensland</option>
-                                            <option value="sa">South Australia</option>
-                                            <option value="tas">Tasmania</option>
-                                            <option value="vic">Victoria</option>
-                                            <option value="wa">Western Australia</option>
-                                            <option value="act">Australian Capital Territory</option>
-                                            <option value="nt">Northen Territory</option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">

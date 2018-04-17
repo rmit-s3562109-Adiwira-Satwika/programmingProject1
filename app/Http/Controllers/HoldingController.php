@@ -27,6 +27,16 @@ class HoldingController extends Controller
             //redirect to the home page
             return redirect('/home');
 
+            //Record transaction
+            $trans = new Transaction();
+            $trans->nickname=$name;
+            $trans->code=$code;
+            $trans->amount=$amount;
+            $trans->value=$cost;
+            $trans->dateTime=date('Y-m-d H:i:s');
+            $trans->purchase=true;
+            $trans->save();
+
     	}
     }
 
@@ -37,6 +47,9 @@ class HoldingController extends Controller
 
     	//Retrieve amount of share user holds
     	$amountheld=$hold->quantity;
+
+        //Retrieve price of shares
+        $cost=(Share::find($code)->value)*$amount;
 
     	//Return false if insufficient shares
     	if($amountheld<$amount){
@@ -53,11 +66,18 @@ class HoldingController extends Controller
     		$hold->update(['quantity'=>$amountheld-$amount]);
     	}
 
-    	//Retrieve price of shares
-    	$sellPrice=(Share::find($code)->value)*$amount;
-
     	//Increment trading account balance by sold value
-    	TradingAccountController::addFunds($name,$sellPrice);
+    	TradingAccountController::addFunds($name,$cost);
+
+        //Record transaction
+        $trans = new Transaction();
+        $trans->nickname=$name;
+        $trans->code=$code;
+        $trans->amount=$amount;
+        $trans->value=$cost;
+        $trans->dateTime=date('Y-m-d H:i:s');
+        $trans->purchase=false;
+        $trans->save();
 
     	return true;
     }*/

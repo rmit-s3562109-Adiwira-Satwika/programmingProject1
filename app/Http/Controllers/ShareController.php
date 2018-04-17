@@ -9,6 +9,8 @@ class ShareController extends Controller
 	//Get array of all tracked shares
 	public function getAllShares(){
 		return Share::orderBy('code')->get();
+
+    	return view('home', compact('lists'));
 	}
 
 	//Find share by code

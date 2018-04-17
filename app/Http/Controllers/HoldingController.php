@@ -23,6 +23,9 @@ class HoldingController extends Controller
 
     		//Save to database
     		$hold->save();
+            
+            //redirect to the home page
+            return redirect('/home');
 
             //Record transaction
             $trans = new Transaction();
@@ -37,7 +40,7 @@ class HoldingController extends Controller
     	}
     }
 
-
+/*
     public function sellShares($name,$code,$amount){
     	//Retrieve user holding
     	$hold=Holding::find($name,$code)
@@ -77,5 +80,5 @@ class HoldingController extends Controller
         $trans->save();
 
     	return true;
-    }
+    }*/
 }

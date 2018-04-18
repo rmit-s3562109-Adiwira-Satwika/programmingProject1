@@ -25,14 +25,7 @@
         width: 100%;
         height: 100vh;
     }
-
-    .container {
-        position: fixed;
-        top: 30%;
-        left: 28%;
-    }
 </style>​
-@section('content')
 <div class="container2">
     <div class="content2">
         <div class="container">
@@ -94,6 +87,13 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                <p></p>
+                                <div class="form-group row">
+                                    <div class="col-sm-6" style="position:relative;left:250px;">
+                                        <a class="nav-link" href="{{ route('register') }}"><u>Click here to register</u></a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -102,4 +102,3 @@
         </div>
     </div>
 </div>
-@endsection

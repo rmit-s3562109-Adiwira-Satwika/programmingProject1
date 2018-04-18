@@ -69,8 +69,7 @@
 
             .content {
                 position: fixed;
-                top: 40%;
-                left: 25%;
+                top: 50%;
                 text-align: center;
             }
 
@@ -105,10 +104,9 @@
                     @if (Route::has('login'))
                         <div class="top-right links">
                             @auth
-                                <a href="{{ url('/dashboard') }}">Home</a>
+                                <a href="{{ url('/home') }}">Home</a>
                             @else
                                 <a href="{{ route('login') }}">Login</a>
-                                <a href="{{ route('register') }}">Register</a>
                             @endauth
                         </div>
                     @endif

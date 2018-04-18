@@ -131,15 +131,7 @@ input[type=text] {
         </div>
     @endif
 
-    <div class="col-sm-6" style="position:relative;left:380px;">
-      <button class="buttonOption">Buy Stock</button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button class="buttonOption">Sell Stock</button>
-    </div>
-
-    <p>&nbsp;</p>
     <div class="col-sm-6">
-    <p>&nbsp;</p>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">My Trading Accounts</h5>
@@ -185,7 +177,6 @@ input[type=text] {
     </div>
   
     <div class="col-sm-6">
-    <p>&nbsp;</p>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Stock List</h5>
@@ -215,7 +206,6 @@ input[type=text] {
     </div>
 
     <div class="col-sm-6">
-    <p>&nbsp;</p>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">

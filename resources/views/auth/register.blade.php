@@ -25,9 +25,11 @@
         height: 100vh;
     }
 
+    .card {
+        top: 40%;
+    }
 </style>​
 @extends('layouts.app')
-
 @section('content')
 <div class="container2">
     <div class="content2">
@@ -104,6 +106,6 @@
                 </div>
             </div>
         </div>
-        @endsection
     </div>
 </div>
+@endsection

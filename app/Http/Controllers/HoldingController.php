@@ -3,7 +3,7 @@
 namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use ShareMarketGame\Share;
 class HoldingController extends Controller
 {
     //Purchase shares
@@ -44,7 +44,7 @@ class HoldingController extends Controller
     }
 
 
-    public function sellShares(Request $request){
+    /*public function sellShares(Request $request){
         $name=$request->input('name');
         $code=$request->input('code');
         $amount=$request->input('amount');
@@ -86,5 +86,5 @@ class HoldingController extends Controller
         $trans->save();
 
     	return true;
-    }
+    }*/
 }

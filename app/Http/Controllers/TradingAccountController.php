@@ -3,7 +3,7 @@
 namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use ShareMarketGame\TradingAccount;
 class TradingAccountController extends Controller
 {
 	const STARTING_BALANCE=1000000;
@@ -55,7 +55,7 @@ class TradingAccountController extends Controller
     	$account=TradingAccount::find($name);
 
     	//Check for sufficient funds
-    	if(sufficientFunds($name,$amount)){
+    	if(TradingAccountController::sufficientFunds($name,$amount)){
     		//Update balance
     		$account->update(['balance'=>$account->balance-$amount]);
     	}else{
@@ -71,7 +71,7 @@ class TradingAccountController extends Controller
 
     		//Update balance
     		$account->update(['balance'=>$account->balance+$amount]);
-    	}
+    	
     	return true;
     }
 

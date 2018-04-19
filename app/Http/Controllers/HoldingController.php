@@ -4,6 +4,8 @@ namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ShareMarketGame\Share;
+use ShareMarketGame\Holding
+use ShareMarketGame\Transaction;
 class HoldingController extends Controller
 {
     //Purchase shares

@@ -3,6 +3,7 @@
 namespace ShareMarketGame\Console\Commands;
 
 use Illuminate\Console\Command;
+use ShareMarketGame\Share;
 
 class UpdateShares extends Command
 {
@@ -39,8 +40,16 @@ class UpdateShares extends Command
     {
         $shares=Share::all();
         foreach($shares as $share){
-            $share->value=getShareValue($share->code);
-            $share->save();
+            try{
+                $share->value=UpdateShares::getShareValue($share->code);
+                $share->save();
+            }catch(\Exception $e){
+                //Try second time on failed update
+                try{
+                    $share->value=UpdateShares::getShareValue($share->code);
+                    $share->save();
+                }catch(\Exception $e){}
+            }
         }
     }
 
@@ -49,9 +58,14 @@ class UpdateShares extends Command
      *
      * @return Value of share
      */
-    private function getShareValue($code)
+    public static function getShareValue($code)
     {
-        $response=json_decode(file_get_contents("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+$code+".ax&interval=1min&apikey=6DD89FIYMJ57CPGO"));
-        return $response["Time Series (1min)"][0]["4. close"];
+        echo $code;
+        $response=json_decode(file_get_contents("https://www.alphavantage.co/".
+            "query?function=TIME_SERIES_INTRADAY&symbol="
+            .$code.".ax&interval=1min&apikey=6DD89FIYMJ57CPGO"),true);
+        $updated=$response["Meta Data"]["3. Last Refreshed"];
+        return $response["Time Series (1min)"][$updated]["4. close"];
+
     }
 }

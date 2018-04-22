@@ -194,7 +194,7 @@ input[type=text] {
                 <td>{{$list->code}}</td>
                 <td>{{$list->name}}</td>
                 <td>
-                  <a href='/dashboard/{{ $list->code }}'>${{$list->value}}
+                  <a href='/home/{{ $list->code }}'>${{$list->value}}
                   </a>
                 </td>
               </tr>

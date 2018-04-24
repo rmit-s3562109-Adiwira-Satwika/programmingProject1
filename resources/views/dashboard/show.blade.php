@@ -18,7 +18,7 @@
 
       <div class="form-group">
           <label for="name">nickname</label>
-          <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+          <input type="text" class="form-control" id="name" name="nickname" value="{{ Auth::user()->name }}">
       </div>
 
       <div class="form-group">

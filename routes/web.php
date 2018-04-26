@@ -69,6 +69,12 @@ Route::get('/home/{code}', function ($code) {
     return view('dashboard.show', compact('list','stock', 'trades'));
 });
 
+Route::get('home/leaderboard', function (){
+    $boards = Leader::orderBy('place')->get();
+
+    return view('leaderboard', compact('boards'));
+});
+
 Route::post('/buy', 'HoldingController@buyShares');
 
 Auth::routes();

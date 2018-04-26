@@ -9,16 +9,18 @@
       <main >
 
       <div >
-          <h1>Stock Details for: {{ $list->code }} - {{ $list->name }} </h1>
-        <p>You currently owned # amount in this stock</p>
+          <h2>Stock Details for: {{ $list->code }} - {{ $list->name }} </h2>
       </div>
 
 <form method="POST" action="/buy">
   @csrf
 
       <div class="form-group">
-          <label for="name">nickname</label>
-          <input type="text" class="form-control" id="name" name="nickname" value="{{ Auth::user()->name }}">
+          <select name="nickname" for="name">
+              @foreach($trades as $trade)
+                <option value="{{$trade->nickname}}">{{$trade->nickname}}</option>
+              @endforeach
+          </select>
       </div>
 
       <div class="form-group">

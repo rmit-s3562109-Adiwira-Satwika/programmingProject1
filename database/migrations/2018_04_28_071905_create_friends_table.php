@@ -17,8 +17,8 @@ class CreateFriendsTable extends Migration
             $table->string('nickname');
             $table->string('friend');
 
-            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
-            $table->foreign('friend')->references('nickname')->on('trading_accounts');
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
+            $table->foreign('friend')->references('nickname')->on('trading_accounts')->onDelete('cascade');
             
             $table->primary('nickname','friend');
         });

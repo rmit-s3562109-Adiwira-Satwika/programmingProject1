@@ -19,7 +19,7 @@ class CreateHoldingsTable extends Migration
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('trading_nickname')->references('nickname')->on('trading_accounts');
+            $table->foreign('trading_nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
             $table->foreign('asx_code')->references('code')->on('shares');
 
             $table->primary(['trading_nickname','asx_code']);

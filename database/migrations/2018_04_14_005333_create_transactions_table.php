@@ -22,7 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->boolean('purchase');
 
 
-            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
             $table->foreign('code')->references('code')->on('shares');
 
             $table->primary('nickname','dateTime');

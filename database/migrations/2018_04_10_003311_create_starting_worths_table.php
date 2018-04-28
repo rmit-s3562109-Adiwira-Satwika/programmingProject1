@@ -18,7 +18,7 @@ class CreateStartingWorthsTable extends Migration
             $table->decimal('worth',12,2);
             $table->timestamps();
 
-            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
             
             $table->primary('nickname');
         });

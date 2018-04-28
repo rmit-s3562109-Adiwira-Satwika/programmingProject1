@@ -18,19 +18,23 @@ class HoldingController extends Controller
 
     	//Check if user can afford and remove funds if so
     	if(TradingAccountController::removeFunds($name,$cost)){
-    		//Create holding
-    		$hold=new Holding;
 
-    		//Set values
-    		$hold->nickname=$name;
-    		$hold->code=$code;
-    		$hold->quantity=$amount;
+            $hold=Holding::find($name,$code);
+            if($hold->isEmpty()){
+    		  //Create holding
+    		  $hold=new Holding;
+            
+    		  //Set values
+    		  $hold->nickname=$name;
+    		  $hold->code=$code;
+    		  $hold->quantity=$amount;
+            }else{
+                //Set quantity
+                $hold->quantity=$hold->quantity+$amount;
 
+            }
     		//Save to database
     		$hold->save();
-            
-            //redirect to the home page
-            return redirect('/home');
 
             //Record transaction
             $trans = new Transaction();
@@ -41,6 +45,10 @@ class HoldingController extends Controller
             $trans->dateTime=date('Y-m-d H:i:s');
             $trans->purchase=true;
             $trans->save();
+
+            
+            //redirect to the home page
+            return redirect('/home');
 
     	}
     }

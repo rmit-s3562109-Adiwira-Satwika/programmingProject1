@@ -21,7 +21,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     $lists = ShareMarketGame\Share::all();
 
-    return view('home', compact('lists'));
+    $trading = ShareMarketGame\TradingAccount::all();
+
+    return view('home', compact('lists', 'trading'));
     //return $lists;
 });
 
@@ -59,11 +61,12 @@ Route::get('/search', function () {
     //return $lists;
 });
 
-Route::get('/dashboard/{code}', function ($code) {
+Route::get('/home/{code}', function ($code) {
     $list = DB::table('shares')->where('code',$code)->first();
     $stock = ShareMarketGame\Holding::all();
+    $trades = ShareMarketGame\TradingAccount::all();
 
-    return view('dashboard.show', compact('list','stock'));
+    return view('dashboard.show', compact('list','stock', 'trades'));
 });
 
 Route::post('/buy', 'HoldingController@buyShares');

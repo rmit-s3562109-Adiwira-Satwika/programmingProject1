@@ -144,9 +144,10 @@ input[type=text] {
                   </tr>
               </thead>
               <tbody>
+                @foreach ($trading as $trade)
                   <tr>
-                    <td>Sample 1</td>
-                    <td>$AUD 500,000</td>
+                    <td>{{$trade->nickname}}</td>
+                    <td>$AUD {{$trade->balance}}</td>
                     <td>
                       <div class="dropdown">
                         <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
@@ -157,19 +158,7 @@ input[type=text] {
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Sample 2</td>
-                    <td>$AUD 1,000,000</td>
-                    <td>
-                      <div class="dropdown">
-                        <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
-                        <div class="dropdown-content2">
-                          <h5><b>Confirm deleting this trading account?</b></h5>
-                          <button onclick="myFunction()" class="button2">Delete</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  @endforeach
               </tbody>
           </table>
         </div>
@@ -194,7 +183,7 @@ input[type=text] {
                 <td>{{$list->code}}</td>
                 <td>{{$list->name}}</td>
                 <td>
-                  <a href='/dashboard/{{ $list->code }}'>${{$list->value}}
+                  <a href='/home/{{ $list->code }}'>${{$list->value}}
                   </a>
                 </td>
               </tr>

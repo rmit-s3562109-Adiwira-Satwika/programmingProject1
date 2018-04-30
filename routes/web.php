@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::post('/home', 'TradingAccountController@createTradingAccount');
 
 Route::get('/home', function () {
-    $session_id = \Auth::user()->id;
+    $session_id = Auth::user()->id;
     $lists = ShareMarketGame\Share::all();
     $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $lists3 = ShareMarketGame\TradingAccount::all();

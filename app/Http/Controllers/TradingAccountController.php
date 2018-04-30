@@ -4,14 +4,15 @@ namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ShareMarketGame\TradingAccount;
+define("STARTING_BALANCE", "1000000");
 class TradingAccountController extends Controller
 {
-	const STARTING_BALANCE=1000000;
-
 	//Create trading account with default balance
     public function createTradingAccount(Request $request){
+		$session_id = \Auth::user()->id;
         $nname=$request->input('nname');
-        $uid->input('uid');
+        $uid = $session_id;
+		//$balance = STARTING_BALANCE;
     	//Create Trading Account object
     	$account = new TradingAccount;
 
@@ -23,17 +24,20 @@ class TradingAccountController extends Controller
     	//Save to database
     	$account->save();
 
+		return redirect('/home');
+
     }
 
 	//Change nickname of trading account
     public function changeNickname(Request $request){
         $old=$request->input('old');
-        $new->input('new');
+        $new=$request->input('new');
     	//Retrieve record
     	$account=TradingAccount::find($old);
 
     	//Update nickname
     	$account->update(['nickname'=>$new]);
+        return redirect('/nickname');
     }
 
     //Change nickname of trading account
@@ -71,7 +75,7 @@ class TradingAccountController extends Controller
 
     		//Update balance
     		$account->update(['balance'=>$account->balance+$amount]);
-    	
+
     	return true;
     }
 
@@ -81,14 +85,16 @@ class TradingAccountController extends Controller
         $receiver=$request->input('receiver');
         $amount=$request->input('amount');
     	//Check if sufficient funds if so reduce sender balance
-    	if(removeFunds($sender,$amount)){
+    	if(self::removeFunds($sender,$amount)){
     		//Add transferred funds to receiver
-    		addFunds($receiver,$amount);
-
+    		self::addFunds($receiver,$amount);
+            //$Response = "success";
     		//Return success indicator
-    		return true;
+    		//return true;
     	}
     	//Return false if insufficient funds thus transfer fails
-    	return false;
+    	//return false;
+        //$Response = "success";
+        return redirect('/transfer');
     }
 }

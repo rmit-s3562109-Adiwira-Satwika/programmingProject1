@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'admin' => false,
-            'last_active' => date('Y-m-d H:i:s');
+            'last_active' => date('Y-m-d H:i:s'),
         ]);
     }
 }

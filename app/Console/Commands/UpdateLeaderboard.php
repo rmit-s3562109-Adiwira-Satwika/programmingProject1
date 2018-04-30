@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Console\Commands;
+namespace ShareMarketGame\Console\Commands;
 
 use Illuminate\Console\Command;
+use ShareMarketGame\Leader;
+use ShareMarketGame\Holding;
+use ShareMarketGame\StartingWorth;
+use ShareMarketGame\TradingAccount;
 
 class UpdateLeaderboard extends Command
 {
@@ -48,7 +52,7 @@ class UpdateLeaderboard extends Command
             $gain=$value-$prevValue;
 
             //Add to leaderboard if appropriate
-            addtoLeaderBoard($acc->nickname,$gain);
+            UpdateLeaderboard::addtoLeaderBoard($acc->nickname,$gain);
 
         }
     }
@@ -66,7 +70,7 @@ class UpdateLeaderboard extends Command
         $total=$total+$account->balance;
 
         //Retrieve all holdings
-        $holdings=Holding::find('nickname',$nickname);
+        $holdings=Holding::find('nickname',$account->nickname);
 
         //Add value of each holding to total
         foreach($holdings as $hold){
@@ -83,9 +87,9 @@ class UpdateLeaderboard extends Command
     *
     * @return none
     */
-    private function addToLeaderboard($nickname,$amount){
+    public static function addToLeaderboard($nickname,$amount){
         //Get current leaderboard
-        $leaders=Leaders::all()->orderBy('place');
+        $leaders=Leader::all()->orderBy('place');
 
         //Set defaults
         $insert=true;

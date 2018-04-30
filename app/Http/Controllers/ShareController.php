@@ -3,6 +3,7 @@
 namespace ShareMarketGame\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ShareMarketGame\Share;
 
 class ShareController extends Controller
 {
@@ -32,7 +33,7 @@ class ShareController extends Controller
 	*	@param $limit Number of responses to limit return to
 	*	@return Returns false on invalid input otherwise returns array of values
 	*/
-	public function requestShareData($code,$timeSeries,$time,$limit){
+	public function requestShareData(Request $request){
 		$code=$request->input('code');
 		$timeSeries=$request->input('timerSeries');
 		$time=$request->input('time');
@@ -44,25 +45,36 @@ class ShareController extends Controller
 		}
 
 		if($timeSeries=="INTRADAY"){
-			$timestr="&interval=+"$time"+min"
+			$time=$request->input('time');
+
+			$timestr="&interval=+"$time"+min";
+			$accessStr=$time"+min";
 		
+
 			//Check for valid time and limit input
 			if($time!=1||$time!=5||$time!=15||$time!=30||$time!=60||$limit>100){
 				return false;
 			}
 		}else{
 			$timestr="";
+			$accessStr=$timeSeries;
 		}
 
-		//Get api response and grab data section
-		$response=json_decode(file_get_contents("https://www.alphavantage.co/query?function=TIME_SERIES_"+
-			$timeSeries+"&symbol="+$code+".ax"+$timestr+"&apikey=6DD89FIYMJ57CPGO"));
-        $section= $response[1];
+		try{
+			//Get api response and grab data section
+			$response=json_decode(file_get_contents("https://www.alphavantage.co/query?function=TIME_SERIES_"+
+				$timeSeries+"&symbol="+$code+".ax"+$timestr+"&apikey=6DD89FIYMJ57CPGO"));
+        	$section= $response["Time Series ("+$accessStr+")"];
+        }
+        //Check if request fails
+        catch(\Exception $e){
+        	return array();
+        }
 
         //Add each value to limit
         $array=array();
-        for($i=0;$i<$limit,$i++){
-        	$array_push($array,$section[$i]["4. close"]);
+        foreach($section as $ele){
+        	$array_push($array,$ele["4. close"]);
         }
         return $array;
 	}

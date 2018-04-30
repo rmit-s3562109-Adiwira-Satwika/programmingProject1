@@ -58,7 +58,7 @@ class UpdateLeaderboard extends Command
      *
      * @return total value of account
      */
-    private static function calculateValue($account)
+    public static function calculateValue($account)
     {
         $total=0;
 

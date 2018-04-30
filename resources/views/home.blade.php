@@ -272,6 +272,7 @@ input[type=text] {
             <li class="list-group-item">Transaction History</li>
             <li class="list-group-item">My Stock Performance</li>
             <li class="list-group-item"><a href="/search">Search for Stock</a></li>
+              <li class="list-group-item"><a href="home/leaderboard">Leaderboard</a></li>
             <li class="list-group-item"><a href="/programmingProject1/public/transfer">Transfer Funds</a></li>
             <li class="list-group-item"><a href="/programmingProject1/public/nickname">Change Nickname</a></li>
             <li class="list-group-item">Delete Account</li>

@@ -27,9 +27,6 @@ class HoldingController extends Controller
 
     		//Save to database
     		$hold->save();
-            
-            //redirect to the home page
-            return redirect('/home');
 
             //Record transaction
             $trans = new Transaction();
@@ -40,6 +37,9 @@ class HoldingController extends Controller
             $trans->dateTime=date('Y-m-d H:i:s');
             $trans->purchase=true;
             $trans->save();
+
+            //redirect to the home page
+            return redirect('/home');
 
     	}
     }

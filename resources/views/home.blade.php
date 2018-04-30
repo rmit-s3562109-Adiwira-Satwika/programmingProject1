@@ -164,7 +164,8 @@ input[type=text] {
                     <td>{{$list->balance}}</td>
                     <td>
                       <div class="dropdown">
-                        <img class="img2" src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
+                        <img class="img2"
+                             src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
                         <div class="dropdown-content2">
                           <h5><b>Confirm deleting this trading account?</b></h5>
                           <button onclick="myFunction({{$list->nickname}})" class="button2">Delete</button>
@@ -187,11 +188,12 @@ input[type=text] {
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Stock List</h5>
+          <h5 class="card-title">Search Stock</h5>
             <div class="bar">
                 <!--<form method="post">-->
                 <input type='text' placeholder='Search...' id='search-text-input' name='search-text-input'>
-                <img class="search" src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
+                <img class="search"
+                     src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
                 <div id="searchOutput"></div>
                 <!--</form>-->
             </div>
@@ -206,12 +208,32 @@ input[type=text] {
                                 //console.log("{{$list->nickname}}");
                                     var code = "{{$list->code}}";
                                     var name = "{{$list->name}}";
-                                    if( ((document.getElementById('search-text-input').value).toUpperCase() == (code).toUpperCase()) || ((name).toUpperCase().includes((document.getElementById('search-text-input').value).toUpperCase()) == true) ){
+                                    if( ((document.getElementById('search-text-input').value).toUpperCase()
+                                        == (code).toUpperCase()) ||
+                                        ((name).toUpperCase()
+                                            .includes((document.getElementById('search-text-input').value)
+                                                .toUpperCase()) == true) ){
                                         $('#searchOutput').html(`
-                                            <br>
-                                            <b>Match Results:</b>
-                                            <br>
-                                            <p>Code: {{$list->code}} &nbsp; Name: {{$list->name}}</p>
+                                        <br>
+                                             <table class="table table-striped table-sm">
+                                                <thead>
+                                                <tr>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                <td>{{$list->code}}</td>
+                                                <td>{{$list->name}}</td>
+                                                <td>
+                                                <a href='/home/{{ $list->code }}'>${{$list->value}}
+                                                </a>
+                                                </td>
+                                                </tr>
+                                                </tbody>
+                                                </table>
                                         `)
                                     }
                             @endforeach

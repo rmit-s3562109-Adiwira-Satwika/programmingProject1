@@ -20,7 +20,7 @@ class CreateLeadersTable extends Migration
             $table->date('date');
             $table->timestamps();
 
-            $table->foreign('nickname')->references('nickname')->on('trading_accounts');
+            $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
             
             $table->primary('place');
         });

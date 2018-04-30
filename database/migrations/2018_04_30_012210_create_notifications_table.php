@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->increments('id');
+
             $table->string('nickname');
-            $table->string('code');
-            $table->integer('amount');
-            $table->decimal('value',12,2);
-            $table->dateTime('dateTime');
-            $table->boolean('purchase');
+            $table->string('message');
+            $table->timestamps();
 
 
             $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
-            $table->foreign('code')->references('code')->on('shares');
 
-            $table->primary('nickname','dateTime');
+            $table->primary('id');
         });
     }
 
@@ -36,6 +34,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('notifications');
     }
 }

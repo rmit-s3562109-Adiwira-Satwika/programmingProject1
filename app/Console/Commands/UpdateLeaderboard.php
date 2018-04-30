@@ -73,7 +73,6 @@ class UpdateLeaderboard extends Command
 
         $holdings=Holding::find('nickname',$account->nickname);
 
-
         //Add value of each holding to total
         foreach($holdings as $hold){
             $total=$total+($hold->value*$hold->amount);

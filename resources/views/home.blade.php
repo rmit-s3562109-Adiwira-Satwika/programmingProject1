@@ -160,7 +160,7 @@ input[type=text] {
               <tbody>
                   @foreach ($lists2 as $list)
                   <tr>
-                    <td>{{$list->nickname}}</td>
+                      <td><a href="/trading_account/{{$list->nickname}}">{{$list->nickname}}</a></td>
                     <td>{{$list->balance}}</td>
                     <td>
                       <div class="dropdown">

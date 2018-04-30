@@ -43,7 +43,7 @@ class UpdateLeaderboard extends Command
 
         //For each account check gains
         foreach ($accounts as $acc){
-            $value=calculateValue($acc);
+            $value=UpdateLeaderboard::calculateValue($acc);
             $prevValue=StartingWorth::find($acc->nickname);
             $gain=$value-$prevValue;
 
@@ -58,7 +58,7 @@ class UpdateLeaderboard extends Command
      *
      * @return total value of account
      */
-    private function calculateValue($account)
+    public static function calculateValue($account)
     {
         $total=0;
 

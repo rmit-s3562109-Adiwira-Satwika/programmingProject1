@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <style>
-    .container2 {  
-         position: relative; 
+    .container2 {
+         position: relative;
     }
 
     .container2:before {
@@ -11,7 +11,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1;      
+        z-index: 1;
         width: 100%;
         height: auto;
         background-image: url("http://www.visionality.com/wp-content/uploads/2015/10/corporate.jpg");
@@ -20,7 +20,7 @@
     }
 
     .content2 {
-        position: relative; 
+        position: relative;
         z-index: 2;
         width: 100%;
         height: 100vh;
@@ -86,6 +86,13 @@
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="form-group row">
+                                    <div class="col-sm-6" style="position:relative;left:250px;">
+                                        <a class="nav-link" href="{{ route('register') }}"><u>Click here to register</u></a>
                                     </div>
                                 </div>
                             </form>

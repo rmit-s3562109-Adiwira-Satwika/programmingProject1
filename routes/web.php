@@ -18,16 +18,36 @@ Route::get('/', function () {
     //return $lists;
 });
 
-Route::get('/home', function () {
-    $lists = ShareMarketGame\Share::all();
+Route::post('/home', 'TradingAccountController@createTradingAccount');
 
-    return view('home', compact('lists'));
+Route::get('/home', function () {
+    $session_id = Auth::user()->id;
+    $lists = ShareMarketGame\Share::all();
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
+
+    return view('home', compact('lists', 'lists2', 'lists3'));
     //return $lists;
 });
 
+Route::get('/home/{code}', function ($code) {
+    $list = DB::table('shares')->where('code',$code)->first();
+    $stock = ShareMarketGame\Holding::all();
+    return view('dashboard.show', compact('list','stock'));
+});
+
 Route::get('/nickname', function () {
-   
-    return view('nickname', compact('lists'));
+    $session_id = \Auth::user()->id;
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('nickname', compact('lists2', 'lists3'));
+});
+
+Route::post('/nickname', 'TradingAccountController@changeNickname');
+
+Route::get('/resetpassword', function () {
+
+    return view('auth.passwords.email');
     //return $lists;
 });
 
@@ -46,11 +66,13 @@ Route::get('/general-settings', function () {
 });
 
 Route::get('/transfer', function () {
-    $lists = ShareMarketGame\Share::all();
-
-    return view('transfer', compact('lists'));
-    //return $lists;
+    $session_id = \Auth::user()->id;
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('transfer', compact('lists2', 'lists3'));
 });
+
+Route::post('/transfer', 'TradingAccountController@transferFunds');
 
 Route::get('/search', function () {
     $lists = ShareMarketGame\Share::all();
@@ -59,11 +81,17 @@ Route::get('/search', function () {
     //return $lists;
 });
 
-Route::get('/dashboard/{code}', function ($code) {
+Route::get('/home/{code}', function ($code) {
     $list = DB::table('shares')->where('code',$code)->first();
     $stock = ShareMarketGame\Holding::all();
+    $trades = ShareMarketGame\TradingAccount::all();
+    return view('dashboard.show', compact('list','stock', 'trades'));
+});
 
-    return view('dashboard.show', compact('list','stock'));
+Route::get('home/leaderboard', function (){
+    $boards = Leader::orderBy('place')->get();
+
+    return view('leaderboard', compact('boards'));
 });
 
 Route::post('/buy', 'HoldingController@buyShares');

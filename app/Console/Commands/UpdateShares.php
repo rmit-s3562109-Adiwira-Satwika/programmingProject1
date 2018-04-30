@@ -5,6 +5,8 @@ namespace ShareMarketGame\Console\Commands;
 use Illuminate\Console\Command;
 use ShareMarketGame\Share;
 
+use ShareMarketGame\Share;
+
 class UpdateShares extends Command
 {
     /**
@@ -52,7 +54,6 @@ class UpdateShares extends Command
             }
         }
     }
-
     /**
      * Get current value of share from API.
      *
@@ -66,6 +67,5 @@ class UpdateShares extends Command
             .$code.".ax&interval=1min&apikey=6DD89FIYMJ57CPGO"),true);
         $updated=$response["Meta Data"]["3. Last Refreshed"];
         return $response["Time Series (1min)"][$updated]["4. close"];
-
     }
 }

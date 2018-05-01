@@ -5,8 +5,6 @@ namespace ShareMarketGame\Console\Commands;
 use Illuminate\Console\Command;
 use ShareMarketGame\Share;
 
-use ShareMarketGame\Share;
-
 class UpdateShares extends Command
 {
     /**

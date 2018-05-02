@@ -260,9 +260,8 @@
       </div>
       <li class="li"><a href="#news">Transaction History</a></li>
       <li class="li"><a href="#contact">My Stock Performance</a></li>
-      <li class="li"><a href="#about">Search for Stock</a></li>
-      <li class="li"><a href="/programmingProject1/public/transfer">Transfer Funds</a></li>
-      <li class="li"><a href="/programmingProject1/public/nickname">Change Nickname</a></li>
+      <li class="li"><a href="/transfer">Transfer Funds</a></li>
+      <li class="li"><a href="/nickname">Change Nickname</a></li>
     </ul>
     <script>
         var modal = document.getElementById('myModal');

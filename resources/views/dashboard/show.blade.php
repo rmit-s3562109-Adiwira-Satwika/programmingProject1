@@ -10,7 +10,6 @@
 
       <div >
           <h1>Stock Details for: {{ $list->code }} - {{ $list->name }} </h1>
-        <p>You currently owned # amount in this stock</p>
       </div>
 
 <form method="POST" action="/buy">
@@ -18,7 +17,11 @@
 
       <div class="form-group">
           <label for="name">nickname</label>
-          <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+          <select class="form-control" id="exampleFormControlSelect1">
+              @foreach($accounts as $account)
+                <option value="{{$account->nickname}}">{{$account->nickname}}: ${{$account->balance}}</option>
+              @endforeach
+          </select>
       </div>
 
       <div class="form-group">

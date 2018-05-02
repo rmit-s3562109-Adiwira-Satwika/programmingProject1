@@ -37,9 +37,11 @@ Route::get('/trading_account/{nickname}', function ($nickname) {
 });
 
 Route::get('/home/{code}', function ($code) {
+    $session_id = \Auth::user()->id;
+    $accounts = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $list = DB::table('shares')->where('code',$code)->first();
     $stock = ShareMarketGame\Holding::all();
-    return view('dashboard.show', compact('list','stock'));
+    return view('dashboard.show', compact('list', 'accounts', 'stock'));
 });
 
 Route::get('/nickname', function () {
@@ -85,13 +87,6 @@ Route::get('/search', function () {
 
     return view('dashboard.search', compact('lists'));
     //return $lists;
-});
-
-Route::get('/home/{code}', function ($code) {
-    $list = DB::table('shares')->where('code',$code)->first();
-    $stock = ShareMarketGame\Holding::all();
-    $trades = ShareMarketGame\TradingAccount::all();
-    return view('dashboard.show', compact('list','stock', 'trades'));
 });
 
 Route::get('home/leaderboard', function (){

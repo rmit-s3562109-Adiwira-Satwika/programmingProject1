@@ -97,4 +97,6 @@ Route::get('home/leaderboard', function (){
 
 Route::post('/buy', 'HoldingController@buyShares');
 
+Route::post('/sell', 'sellController@sellShares');
+
 Auth::routes();

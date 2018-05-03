@@ -35,7 +35,7 @@ class ShareController extends Controller
 	*/
 	public function requestShareData(Request $request){
 		$code=$request->input('code');
-		$timeSeries=$request->input('timerSeries');
+		$timeSeries=$request->input('timeSeries');
 		$time=$request->input('time');
 		$limit=$request->input('limit');
 

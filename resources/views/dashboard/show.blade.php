@@ -10,15 +10,20 @@
 
       <div >
           <h1>Stock Details for: {{ $list->code }} - {{ $list->name }} </h1>
-        <p>You currently owned # amount in this stock</p>
       </div>
 
 <form method="POST" action="/buy">
   @csrf
 
       <div class="form-group">
-          <label for="name">nickname</label>
-          <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+          <label>nickname</label>
+          <select class="form-control" name='name'>
+              <option>Please select a trading account</option>
+              @foreach($accounts as $account)
+                  <option value="{{$account->nickname}}">
+                    {{$account->nickname}}: ${{$account->balance}}</option>
+              @endforeach
+          </select>
       </div>
 
       <div class="form-group">

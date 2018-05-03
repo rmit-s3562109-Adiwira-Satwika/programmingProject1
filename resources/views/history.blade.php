@@ -3,7 +3,7 @@
 
 @section('content')
     <body>
-
+<h1 style="padding-left: 10%">Transaction History</h1>
     <div class="card" style="padding-left: 10%;padding-right: 10%">
         <div class="card-body">
 

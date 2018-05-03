@@ -179,11 +179,6 @@ input[type=text] {
         </div>
       </div>
     </div>
-    <script>
-    function myFunction(String name){
-        var user =
-    }
-    </script>
 
     <div class="col-sm-6">
       <div class="card">

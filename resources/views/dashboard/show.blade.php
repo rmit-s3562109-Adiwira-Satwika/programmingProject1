@@ -16,10 +16,12 @@
   @csrf
 
       <div class="form-group">
-          <label for="name">nickname</label>
-          <select class="form-control" id="exampleFormControlSelect1">
+          <label>nickname</label>
+          <select class="form-control" name='name'>
+              <option>Please select a trading account</option>
               @foreach($accounts as $account)
-                <option value="{{$account->nickname}}">{{$account->nickname}}: ${{$account->balance}}</option>
+                  <option value="{{$account->nickname}}">
+                    {{$account->nickname}}: ${{$account->balance}}</option>
               @endforeach
           </select>
       </div>

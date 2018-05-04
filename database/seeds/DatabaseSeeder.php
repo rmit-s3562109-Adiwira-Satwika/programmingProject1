@@ -11,9 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /**$this->call(CreateHoldingsTable::class);
-        $this->call(CreateSharesTable::class);
-        $this->call(ShareCodesSeeder::class);
-        */
+        $this->call([
+            UserTableSeeder::class,
+            TradingAccountTableSeeder::class,
+            FriendRequestTableSeeder::class,
+            FriendTableSeeder::class,
+            HoldingTableSeeder::class,
+            LeaderTableSeeder::class,
+            NotificationTableSeeder::class,
+            StartingWorthTableSeeder::class,
+            TransactionTableSeeder::class,
+        ]);
+
     }
 }

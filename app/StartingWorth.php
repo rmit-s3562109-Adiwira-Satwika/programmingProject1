@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SHareMarketGame;
 
 use Illuminate\Database\Eloquent\Model;
 

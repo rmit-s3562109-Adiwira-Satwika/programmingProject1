@@ -8,4 +8,5 @@ class Leader extends Model
 {
     public $incrementing = false;
     protected $fillable = ['place','nickname','date','trading_value'];
+    public $primaryKey = 'place';
 }

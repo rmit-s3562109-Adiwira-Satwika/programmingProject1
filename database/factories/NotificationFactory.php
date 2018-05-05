@@ -7,6 +7,6 @@ $factory->define(ShareMarketGame\Notification::class, function (Faker $faker) {
         'nickname' => function () {
             return factory(ShareMarketGame\TradingAccount::class)->create()->nickname;
         },
-        'message' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+        'message' => $faker->text($maxNbChars = 20),
     ];
 });

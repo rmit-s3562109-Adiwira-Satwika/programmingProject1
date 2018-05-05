@@ -3,15 +3,16 @@
 use Faker\Generator as Faker;
 use ShareMarketGame\Leader;
 
-$factory->define(ShareMarketGame\Leader::class, function (Faker $faker) {
-	$maxLeader=Leader::max('place');
-	if($maxLeader->isEmpty()){
-		$place=1;
-	}else{
-		$place=$maxLeader->id+1;
-	}
+
+/* Autoincrement code given by laracast user 'usman'
+ * see https://laracasts.com/discuss/channels/laravel/model-factory-increment-value-faker?page=1
+ */
+$autoIncrement= autoIncrement();
+
+$factory->define(ShareMarketGame\Leader::class, function (Faker $faker) use ($autoIncrement) {
+	$autoIncrement->next();
     return [
-        'place' => $place, 
+        'place' => $autoIncrement->current(),
         'nickname' => function () {
             return factory(ShareMarketGame\TradingAccount::class)->create()->nickname;
         },
@@ -19,3 +20,10 @@ $factory->define(ShareMarketGame\Leader::class, function (Faker $faker) {
         'trading_value' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10000000),
     ];
 });
+
+function autoIncrement()
+{
+    for ($i = 0; $i < 1000; $i++) {
+        yield $i;
+    }
+}

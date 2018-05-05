@@ -23,7 +23,6 @@ class CreateNotificationsTable extends Migration
 
             $table->foreign('nickname')->references('nickname')->on('trading_accounts')->onDelete('cascade');
 
-            $table->primary('id');
         });
     }
 

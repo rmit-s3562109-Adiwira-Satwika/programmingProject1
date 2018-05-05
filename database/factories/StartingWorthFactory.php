@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(StartingWorth::class, function (Faker $faker) {
+$factory->define(ShareMarketGame\StartingWorth::class, function (Faker $faker) {
     return [
         'nickname' => function () {
             return factory(ShareMarketGame\TradingAccount::class)->create()->nickname;

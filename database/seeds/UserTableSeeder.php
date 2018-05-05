@@ -12,7 +12,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         factory(ShareMarketGame\User::class, 50)->create()->each(function ($u) {
-            $u->posts()->save(factory(ShareMarketGame\Post::class)->make());
+            //$u->posts()->save(factory(ShareMarketGame\Post::class)->make());
         });
     }
 }

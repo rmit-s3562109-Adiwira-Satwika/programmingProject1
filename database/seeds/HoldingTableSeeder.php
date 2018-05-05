@@ -12,7 +12,7 @@ class HoldingTableSeeder extends Seeder
     public function run()
     {
         factory(ShareMarketGame\Holding::class, 50)->create()->each(function ($u) {
-            $u->posts()->save(factory(ShareMarketGame\Post::class)->make());
+            //$u->posts()->save(factory(ShareMarketGame\Post::class)->make());
         });
     }
 }

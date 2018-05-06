@@ -74,7 +74,7 @@ class ShareController extends Controller
         //Add each value to limit
         $array=array();
         foreach($section as $ele){
-        	$array_push($array,$ele["4. close"]);
+        	array_push($array,$ele["4. close"]);
         }
         return $array;
 	}

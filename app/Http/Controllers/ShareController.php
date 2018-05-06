@@ -47,8 +47,8 @@ class ShareController extends Controller
 		if($timeSeries=="INTRADAY"){
 			$time=$request->input('time');
 
-			$timestr="&interval=+"$time"+min";
-			$accessStr=$time"+min";
+			$timestr="&interval="+$time+"min";
+			$accessStr=$time+"min";
 		
 
 			//Check for valid time and limit input

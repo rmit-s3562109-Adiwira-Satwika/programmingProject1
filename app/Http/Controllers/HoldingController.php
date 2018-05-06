@@ -19,14 +19,14 @@ class HoldingController extends Controller
     	//Check if user can afford and remove funds if so
     	if(TradingAccountController::removeFunds($name,$cost)){
 
-            $hold=Holding::find($name,$code);
-            if($hold->isEmpty()){
+            $hold=Holding::where('trading_nickname', $name)->where('asx_code', $code)->first();
+            if($hold==null){
     		  //Create holding
     		  $hold=new Holding;
             
     		  //Set values
-    		  $hold->nickname=$name;
-    		  $hold->code=$code;
+    		  $hold->trading_nickname=$name;
+    		  $hold->asx_code=$code;
     		  $hold->quantity=$amount;
             }else{
                 //Set quantity

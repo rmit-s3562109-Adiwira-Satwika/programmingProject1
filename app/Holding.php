@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Holding extends Model
 {
-    public $incrementing = false;
-    protected $fillable = ['trtading_nickname','asx_code','quantity'];
+    protected $fillable = ['trading_nickname','asx_code','quantity'];
 }

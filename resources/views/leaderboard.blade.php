@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 

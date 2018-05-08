@@ -263,6 +263,7 @@
       <li class="li"><a href="/leaderboard">LeaderBoard</a></li>
       <li class="li"><a href="/transfer">Transfer Funds</a></li>
       <li class="li"><a href="/nickname">Change Nickname</a></li>
+      <li class="li"><a href="/delete">Delete Account</a></li>
     </ul>
     <script>
         var modal = document.getElementById('myModal');

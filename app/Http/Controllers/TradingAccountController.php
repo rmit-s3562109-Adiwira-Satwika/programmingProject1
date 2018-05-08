@@ -26,8 +26,14 @@ class TradingAccountController extends Controller
 
 		return redirect('/home');
 
-    }
+	}
 
+	public function deleteTradingAccount(Request $request){
+		$nname = $request->input('deleteName');
+		$user = TradingAccount::where('nickname' , '=', $nname)->delete();
+		return redirect('/delete');
+	}
+	
 	//Change nickname of trading account
     public function changeNickname(Request $request){
         $old=$request->input('old');

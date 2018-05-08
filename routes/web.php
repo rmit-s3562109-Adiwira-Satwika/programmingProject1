@@ -25,6 +25,16 @@ Route::get('/home', function () {
     return view('home', compact('lists', 'lists2', 'lists3'));
 });
 
+Route::post('/delete', 'TradingAccountController@deleteTradingAccount');
+
+Route::get('/delete', function () {
+    $session_id = Auth::user()->id;
+    $lists = ShareMarketGame\Share::all();
+    $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('delete', compact('lists', 'lists2', 'lists3'));
+});
+
 Route::get('/trading_account/{nickname}', function ($nickname) {
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
     $stock = ShareMarketGame\Share::all();

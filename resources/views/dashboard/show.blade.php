@@ -17,8 +17,7 @@
   @csrf
       <div class="form-group">
           <label>nickname</label>
-          <select class="form-control" name='name'>
-              <option>Please select a trading account</option>
+          <select class="form-control" name='name' required>
               @foreach($accounts as $account)
                   <option value="{{$account->nickname}}">
                     {{$account->nickname}}: ${{$account->balance}}</option>
@@ -33,7 +32,7 @@
 
       <div class="form-group">
         <label for="name">Unit to buy:</label>
-        <input type="number" class="form-control" id="amount" name="amount">
+        <input type="number" class="form-control" id="amount" name="amount" min="1" required>
       </div>
       <button class="btn btn-success" type="submit">Buy</button>
 </form>
@@ -45,8 +44,7 @@
 
                   <div class="form-group">
                       <label>nickname</label>
-                      <select class="form-control" name='name'>
-                          <option>Please select a trading account</option>
+                      <select class="form-control" name='name' required>
                           @foreach($accounts as $account)
                               <option value="{{$account->nickname}}">
                                   {{$account->nickname}}: ${{$account->balance}}</option>
@@ -60,8 +58,8 @@
                   </div>
 
                   <div class="form-group">
-                      <label for="name">Unit to buy:</label>
-                      <input type="number" class="form-control" id="amount" name="amount">
+                      <label for="name">Unit to sell:</label>
+                      <input type="number" class="form-control" id="amount" name="amount" min="1">
                   </div>
                   <button class="btn btn-danger" type="submit">Sell</button>
               </form>

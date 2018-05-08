@@ -32,8 +32,8 @@ Route::get('/home', function () {
 
 Route::get('/trading_account/{nickname}', function ($nickname) {
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
-    $stock = ShareMarketGame\Share::all();
-    return view('history', compact('lists','stock'));
+    $stocks = ShareMarketGame\Share::all();
+    return view('history', compact('lists','stocks'));
 });
 
 Route::get('/home/{code}', function ($code) {
@@ -41,6 +41,7 @@ Route::get('/home/{code}', function ($code) {
     $accounts = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $list = DB::table('shares')->where('code',$code)->first();
     $stock = ShareMarketGame\Holding::all();
+    #$stock = ShareMarketGame\Holding::where('trading_nickname', $accounts->nickname)->first();
     return view('dashboard.show', compact('list', 'accounts', 'stock'));
 });
 

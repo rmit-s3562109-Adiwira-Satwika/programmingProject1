@@ -13,7 +13,8 @@
                     <th scope="col">Timestamp</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Value</th>
+                    <th scope="col">Purchased Value</th>
+                    <th scope="col">Current Value</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,7 +23,7 @@
                         <td scope="row">{{$list->dateTime}}</td>
                         <td>{{$list->code}}</td>
                         <td>{{$list->amount}}</td>
-                        <td>{{$list->value}}</td>
+                        <td>${{$list->value}}</td>
                     </tr>
                 @endforeach
                 </tbody>

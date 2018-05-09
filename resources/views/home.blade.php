@@ -138,171 +138,124 @@ input[type=text] {
 </style>
 @section('content')
 <div class="container">
-    <div class="row justify-content-left">
-        @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-        @endif
+  <div class="row justify-content-left">
+    @if (session('status'))
+    <div class="alert alert-success">
+      {{ session('status') }}
+    </div>
+    @endif
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">My Trading Accounts</h5>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                  <th>Nickname</th>
+                  <th>Account Balance (AUD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($lists2 as $list)
+                <tr>
+                <form action="{{ action('TradingAccountController@deleteTradingAccount') }}" method="post">
+                  <td><label id="name"><a href="/trading_account/{{$list->nickname}}">{{$list->nickname}}</a></label></td>
+                  <td>{{$list->balance}}</td>
+                </form>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  &nbsp;&nbsp;
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Search Stock</h5>
+          <div class="bar">
+              <!--<form method="post">-->
+              <input type='text' placeholder='Search...' id='search-text-input' name='search-text-input'>
+              <img class="search"
+                    src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
+              <div id="searchOutput"></div>
+              <!--</form>-->
+          </div>
+          <script>
+              $(document).ready(function(){
+                  $(".search").click(function(){
+                      if((document.getElementById('search-text-input').value) != ""){
+                          $('#searchOutput').html(`
 
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">My Trading Accounts</h5>
-          <table class="table table-striped table-sm">
+                          `)
+                          @foreach ($lists as $list)
+                              //console.log("{{$list->nickname}}");
+                                  var code = "{{$list->code}}";
+                                  var name = "{{$list->name}}";
+                                  if( ((document.getElementById('search-text-input').value).toUpperCase()
+                                      == (code).toUpperCase()) ||
+                                      ((name).toUpperCase()
+                                          .includes((document.getElementById('search-text-input').value)
+                                              .toUpperCase()) == true) ){
+                                      $('#searchOutput').html(`
+                                      <br>
+                                            <table class="table table-striped table-sm">
+                                              <thead>
+                                              <tr>
+                                              <th>Code</th>
+                                              <th>Name</th>
+                                              <th>Value</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>
+                                              <tr>
+                                              <td>{{$list->code}}</td>
+                                              <td>{{$list->name}}</td>
+                                              <td>
+                                              <a href='/home/{{ $list->code }}'>${{$list->value}}
+                                              </a>
+                                              </td>
+                                              </tr>
+                                              </tbody>
+                                              </table>
+                                      `)
+                                  }
+                          @endforeach
+                      }else{
+                          $('#searchOutput').html(`
+                              <p><font color="red">Error: Invalid value. Please enter a stock code / name.</font></p>
+                          `)
+                      }
+                  });
+              });
+          </script>
+          <div id="table-scroll">
+            <table class="table table-striped table-sm">
               <thead>
-                  <tr>
-                    <th>Nickname</th>
-                    <th>Account Balance (AUD)</th>
-                    <th>Action</th>
+                <tr>
+                  <th>Code</th>
+                    <th>Name</th>
+                    <th>Value</th>
                   </tr>
               </thead>
               <tbody>
-                  @foreach ($lists2 as $list)
-                  <tr>
-                      <td><a href="/trading_account/{{$list->nickname}}">{{$list->nickname}}</a></td>
-                    <td>{{$list->balance}}</td>
-                    <td>
-                      <div class="dropdown">
-                        <img class="img2"
-                             src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/dustbin-512.png">
-                        <div class="dropdown-content2">
-                          <h5><b>Confirm deleting this trading account?</b></h5>
-                          <button onclick="myFunction({{$list->nickname}})" class="button2">Delete</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach
+                @foreach ($lists as $list)
+                <tr>
+                  <td>{{$list->code}}</td>
+                  <td>{{$list->name}}</td>
+                  <td>
+                    <a href='/home/{{ $list->code }}'>${{$list->value}}
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
               </tbody>
-          </table>
-        </div>
+            </table>
+          </div>
       </div>
     </div>
-
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Search Stock</h5>
-            <div class="bar">
-                <!--<form method="post">-->
-                <input type='text' placeholder='Search...' id='search-text-input' name='search-text-input'>
-                <img class="search"
-                     src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
-                <div id="searchOutput"></div>
-                <!--</form>-->
-            </div>
-            <script>
-                $(document).ready(function(){
-                    $(".search").click(function(){
-                        if((document.getElementById('search-text-input').value) != ""){
-                            $('#searchOutput').html(`
-
-                            `)
-                            @foreach ($lists as $list)
-                                //console.log("{{$list->nickname}}");
-                                    var code = "{{$list->code}}";
-                                    var name = "{{$list->name}}";
-                                    if( ((document.getElementById('search-text-input').value).toUpperCase()
-                                        == (code).toUpperCase()) ||
-                                        ((name).toUpperCase()
-                                            .includes((document.getElementById('search-text-input').value)
-                                                .toUpperCase()) == true) ){
-                                        $('#searchOutput').html(`
-                                        <br>
-                                             <table class="table table-striped table-sm">
-                                                <thead>
-                                                <tr>
-                                                <th>Code</th>
-                                                <th>Name</th>
-                                                <th>Value</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                <td>{{$list->code}}</td>
-                                                <td>{{$list->name}}</td>
-                                                <td>
-                                                <a href='/home/{{ $list->code }}'>${{$list->value}}
-                                                </a>
-                                                </td>
-                                                </tr>
-                                                </tbody>
-                                                </table>
-                                        `)
-                                    }
-                            @endforeach
-                        }else{
-                            $('#searchOutput').html(`
-                                <p><font color="red">Error: Invalid value. Please enter a stock code / name.</font></p>
-                            `)
-                        }
-                    });
-                });
-            </script>
-            <div id="table-scroll">
-              <table class="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>Code</th>
-                      <th>Name</th>
-                      <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @foreach ($lists as $list)
-                  <tr>
-                    <td>{{$list->code}}</td>
-                    <td>{{$list->name}}</td>
-                    <td>
-                      <a href='/home/{{ $list->code }}'>${{$list->value}}
-                      </a>
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-          Trading Account Management
-          </h5>
-          <ul class="list-group list-group-flush">
-            <div class="dropdown">
-              <span><li class="list-group-item">New Trading Account</li></span>
-                <div class="dropdown-content">
-                    <h5><b>New account nickname : </b></h5>
-                    <form action="{{ action('TradingAccountController@createTradingAccount') }}" method="post">
-                    <input type="text" id="nname" name="nname"
-                      placeholder="Enter a nickname for the new trading account" required>
-                    <button class="button" style="vertical-align:middle" type="submit"><span>Proceed </span></button>
-                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                    </form>
-                </div>
-            </div>
-            <li class="list-group-item">Transaction History</li>
-            <li class="list-group-item">My Stock Performance</li>
-            <li class="list-group-item"><a href="/search">Search for Stock</a></li>
-              <li class="list-group-item"><a href="home/leaderboard">Leaderboard</a></li>
-            <li class="list-group-item"><a href="/programmingProject1/public/transfer">Transfer Funds</a></li>
-            <li class="list-group-item"><a href="/programmingProject1/public/nickname">Change Nickname</a></li>
-            <li class="list-group-item">Delete Account</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
-<script>
-    function myFunction() {
-      confirm("Are you sure you want to delete?");
-    }
-</script>
 @endsection

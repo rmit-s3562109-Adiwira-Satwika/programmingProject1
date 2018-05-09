@@ -71,46 +71,23 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="responseMsg"></div>
             <div class="card">
-                <div class="card-header">{{ __('Transfer Funds') }}</div>
+                <div class="card-header">{{ __('Delete Trading Account') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ action('TradingAccountController@transferFunds') }}">
+                    <form method="POST" action="{{ action('TradingAccountController@deleteTradingAccount') }}">
                         @csrf
 
                         &nbsp;&nbsp;
                         <div class="form-group row">
-                            <label for="transferFrom" class="col-sm-4 col-form-label text-md-right">{{ __('Transfer From :') }}</label>
+                            <label for="deleteAcc" class="col-sm-4 col-form-label text-md-right">{{ __('Choose an account to delete :') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control{{ $errors->has('transferFrom') ? ' is-invalid' : '' }}" id="sender" name="sender" required>
+                                <select class="form-control{{ $errors->has('deleteAcc') ? ' is-invalid' : '' }}" id="deleteName" name="deleteName" required>
                                     @foreach ($lists2 as $list)
                                         <option value="{{$list->nickname}}">{{$list->nickname}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-
-                        &nbsp;&nbsp;
-                        <div class="form-group row">
-                            <label for="transferTo" class="col-md-4 col-form-label text-md-right">{{ __('Transfer To :') }}</label>
-
-                            <div class="col-md-6">
-                                <select class="form-control{{ $errors->has('transferTo') ? ' is-invalid' : '' }}" id="receiver" name="receiver" required>
-                                    @foreach ($lists3 as $list)
-                                        <option value="{{$list->nickname}}">{{$list->nickname}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        &nbsp;&nbsp;
-                        <div class="form-group row">
-                            <label for="transferAmmount" class="col-sm-4 col-form-label text-md-right">{{ __('Transfer Ammount (AUD) :') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="amount" type="text" class="form-control{{ $errors->has('transAmmount') ? ' is-invalid' : '' }}" name="amount" required autofocus>
                             </div>
                         </div>
 
@@ -128,12 +105,4 @@
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function() {
-    $('.transferFrom').select2();
-});
-$(document).ready(function() {
-    $('.transferTo').select2();
-});
-</script>
 @endsection

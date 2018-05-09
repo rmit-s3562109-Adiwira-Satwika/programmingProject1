@@ -26,8 +26,14 @@ class TradingAccountController extends Controller
 
 		return redirect('/home');
 
-    }
+	}
 
+	public function deleteTradingAccount(Request $request){
+		$nname = $request->input('deleteName');
+		$user = TradingAccount::where('nickname' , '=', $nname)->delete();
+		return redirect('/delete');
+	}
+	
 	//Change nickname of trading account
     public function changeNickname(Request $request){
         $old=$request->input('old');
@@ -88,13 +94,11 @@ class TradingAccountController extends Controller
     	if(self::removeFunds($sender,$amount)){
     		//Add transferred funds to receiver
     		self::addFunds($receiver,$amount);
-            //$Response = "success";
     		//Return success indicator
-    		//return true;
+			//return true;
     	}
     	//Return false if insufficient funds thus transfer fails
     	//return false;
-        //$Response = "success";
-        return redirect('/transfer');
+		return redirect('/transfer');
     }
 }

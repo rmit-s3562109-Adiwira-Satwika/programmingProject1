@@ -258,11 +258,10 @@
             </script>
           </div>
       </div>
-      <li class="li"><a href="/transaction-history">Transaction History</a></li>
-      <li class="li"><a href="/stock-performance">My Stock Performance</a></li>
       <li class="li"><a href="/leaderboard">LeaderBoard</a></li>
       <li class="li"><a href="/transfer">Transfer Funds</a></li>
       <li class="li"><a href="/nickname">Change Nickname</a></li>
+      <li class="li"><a href="/delete">Delete Account</a></li>
     </ul>
     <script>
         var modal = document.getElementById('myModal');

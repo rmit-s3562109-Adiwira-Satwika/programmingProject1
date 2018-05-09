@@ -170,6 +170,7 @@ input[type=text] {
       </div>
     </div>
   </div>
+  &nbsp;&nbsp;
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">

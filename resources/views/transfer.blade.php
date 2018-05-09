@@ -71,6 +71,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="responseMsg"></div>
             <div class="card">
                 <div class="card-header">{{ __('Transfer Funds') }}</div>
 

@@ -94,13 +94,11 @@ class TradingAccountController extends Controller
     	if(self::removeFunds($sender,$amount)){
     		//Add transferred funds to receiver
     		self::addFunds($receiver,$amount);
-            //$Response = "success";
     		//Return success indicator
-    		//return true;
+			//return true;
     	}
     	//Return false if insufficient funds thus transfer fails
     	//return false;
-        //$Response = "success";
-        return redirect('/transfer');
+		return redirect('/transfer');
     }
 }

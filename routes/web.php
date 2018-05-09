@@ -37,16 +37,18 @@ Route::get('/delete', function () {
 
 Route::get('/trading_account/{nickname}', function ($nickname) {
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
+    $lists3 = ShareMarketGame\TradingAccount::all();
     $stock = ShareMarketGame\Share::all();
-    return view('history', compact('lists','stock'));
+    return view('history', compact('lists', 'lists3', 'stock'));
 });
 
 Route::get('/home/{code}', function ($code) {
     $session_id =  \Auth::user()->id;
     $accounts = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $list = DB::table('shares')->where('code',$code)->first();
+    $lists3 = ShareMarketGame\TradingAccount::all();
     $stock = ShareMarketGame\Holding::all();
-    return view('dashboard.show', compact('list', 'accounts', 'stock'));
+    return view('dashboard.show', compact('list', 'lists3', 'accounts', 'stock'));
 });
 
 Route::get('/nickname', function () {

@@ -255,7 +255,7 @@
       <li class="li"><a href="/leaderboard">LeaderBoard</a></li>
       <li class="li"><a href="/transfer">Transfer Funds</a></li>
       <li class="li"><a href="/nickname">Change Nickname</a></li>
-      <li class="li"><a href="/delete">Delete Account</a></li>
+      <li class="li"><a href="/delete">Delete Trading Account</a></li>
     </ul>
     <script>
         var modal = document.getElementById('myModal');
@@ -273,6 +273,8 @@
         }
     </script>
     <main class="py-4">
+        @include('flash-message')
+
         @yield('content')
     </main>
 </body>

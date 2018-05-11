@@ -23,15 +23,14 @@ class TradingAccountController extends Controller
 
     	//Save to database
     	$account->save();
-
-		return redirect('/home');
+		return redirect()->back()->with('success', 'Successfully created new trading acoount!');
 
 	}
 
 	public function deleteTradingAccount(Request $request){
 		$nname = $request->input('deleteName');
 		$user = TradingAccount::where('nickname' , '=', $nname)->delete();
-		return redirect('/delete');
+		return redirect()->back()->with('success', 'Successfully deleted trading account!');
 	}
 	
 	//Change nickname of trading account
@@ -43,7 +42,7 @@ class TradingAccountController extends Controller
 
     	//Update nickname
     	$account->update(['nickname'=>$new]);
-        return redirect('/nickname');
+        return redirect()->back()->with('success', 'Change nickname activity success!');
     }
 
     //Change nickname of trading account
@@ -95,10 +94,9 @@ class TradingAccountController extends Controller
     		//Add transferred funds to receiver
     		self::addFunds($receiver,$amount);
     		//Return success indicator
-			//return true;
+			return redirect()->back()->with('success', 'Funds successfully transferred!');
     	}
     	//Return false if insufficient funds thus transfer fails
-    	//return false;
-		return redirect('/transfer');
+    	return redirect()->back()->with('error', 'Error: Transfer fund activity failed. Please try again.');
     }
 }

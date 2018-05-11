@@ -27,12 +27,6 @@
         width:48px;
         height:48px;
     }
-    .dropdown-menu{
-        left: -67px;
-    }
-    .bar {
-        white-space: nowrap;
-    }
     head, body{
         width: 100%;
         height: 100%;
@@ -191,27 +185,27 @@
                 @guest
                 @else
                     <li class="nav-item dropdown">
-                        <!--<div class="bar">-->
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle bar" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                        <!--<a id="navbarDropdown" class="nav-link dropdown-toggle bar" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>-->
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:200px">{{ Auth::user()->name }}
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" style="width:200px">
+                            <a class="dropdown-item" href="/programmingProject1/public/resetpassword">
+                                {{ __('Reset Password') }}
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="con">
-                                        <a class="dropdown-item" href="/programmingProject1/public/resetpassword">
-                                            {{ __('Reset Password') }}
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                </div>
-                            </div>
-                        <!--</div>-->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            </ul>
+                        </div>
                     </li>
                 @endguest
             </ul>

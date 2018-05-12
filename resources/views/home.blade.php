@@ -145,7 +145,7 @@ input[type=text] {
     </div>
     @endif
   </div>
-  <div class="col-sm-6">
+    <div class="card-deck">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">My Trading Accounts</h5>
@@ -169,9 +169,7 @@ input[type=text] {
         </table>
       </div>
     </div>
-  </div>
   &nbsp;&nbsp;
-  <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Search Stock</h5>
@@ -256,6 +254,7 @@ input[type=text] {
           </div>
       </div>
     </div>
-  </div>
+
+</div>
 </div>
 @endsection

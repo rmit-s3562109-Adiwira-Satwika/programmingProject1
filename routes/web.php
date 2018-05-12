@@ -98,6 +98,6 @@ Route::get('/leaderboard', function (){
 
 Route::post('/buy', 'HoldingController@buyShares');
 
-Route::post('/sell', 'sellController@sellShares');
+Route::post('/sell', 'SellingController@sellShares');
 
 Auth::routes();

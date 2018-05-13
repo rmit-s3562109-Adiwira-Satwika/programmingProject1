@@ -14,7 +14,7 @@ class SellingController extends Controller
         $code=$request->input('code');
         $amount=$request->input('amount');
         //Retrieve user holding
-        $hold=Holding::find($name,$code)
+        $hold=Holding::where('trading_nickname',$name)->where('asx_code',$code)->first();
 
     	//Retrieve amount of share user holds
     	$amountheld=$hold->quantity;

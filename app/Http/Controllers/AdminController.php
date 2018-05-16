@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-	public static const INACTIVITY_WARNING = 30;
+	public const INACTIVITY_WARNING = 30;
 
     public static function getInactiveUsers(){
     	//Set date to get users last active before

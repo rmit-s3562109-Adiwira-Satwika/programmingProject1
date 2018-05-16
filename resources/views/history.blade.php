@@ -1,5 +1,5 @@
 <html>
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
     <body>
@@ -24,6 +24,9 @@
                         <td>{{$list->code}}</td>
                         <td>{{$list->amount}}</td>
                         <td>${{$list->value}}</td>
+                        @foreach($stocks as $stock)
+                        <td>{{$stock->value}}</td>
+                        @endforeach
                     </tr>
                 @endforeach
                 </tbody>

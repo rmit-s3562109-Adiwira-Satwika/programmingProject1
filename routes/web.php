@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin','adminController@getInactiveUsers');
+
 Route::post('/home', 'TradingAccountController@createTradingAccount');
 
 Route::get('/home', function () {

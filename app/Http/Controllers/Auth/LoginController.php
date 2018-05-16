@@ -24,10 +24,10 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ( $user->isAdmin() ) {// do your margic here
-        //return redirect()->route('admin pagename');
+            return redirect('/admin');
+        } else {
+            return redirect('/home');
         }
-
-        return redirect('/home');
     }
     /**
      * Where to redirect users after login.

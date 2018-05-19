@@ -25,7 +25,7 @@
                         <td>{{$list->amount}}</td>
                         <td>${{$list->value}}</td>
                         @foreach($stocks as $stock)
-                        <td>{{$stock->value}}</td>
+                        <td>{{($stock->value) * ($list->amount)}}</td>
                         @endforeach
                     </tr>
                 @endforeach

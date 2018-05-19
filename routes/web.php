@@ -42,16 +42,16 @@ Route::get('/trading_account/{nickname}', function ($nickname) {
     $stockCode = DB::table('Transactions')->select('code')->where('nickname',$nickname)->first()->code;
     $lists3 = ShareMarketGame\TradingAccount::all();
     $stocks = ShareMarketGame\Share::where('code', '=', $stockCode)->get();
-    return view('history', compact('lists','stocks','lists3'));
+    return view('history', compact('lists', 'stocks', 'lists3'));
 
 });
 
 Route::get('/home/{code}', function ($code) {
-    $session_id =  \Auth::user()->id;
+    $session_id = Auth::user()->id;
     $accounts = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $list = DB::table('shares')->where('code',$code)->first();
     $lists3 = ShareMarketGame\TradingAccount::all();
-    $stock = ShareMarketGame\Holding::all();
+    $stock = DB::table('holdings')->get();
     #$stock = ShareMarketGame\Holding::where('trading_nickname', $accounts->nickname)->first();
     return view('dashboard.show', compact('list', 'lists3', 'accounts', 'stock'));
 

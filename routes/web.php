@@ -39,8 +39,10 @@ Route::get('/delete', function () {
 
 Route::get('/trading_account/{nickname}', function ($nickname) {
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
-    $stocks = ShareMarketGame\Share::all();
-    return view('history', compact('lists','stocks'));
+    $stockCode = DB::table('Transactions')->select('code')->where('nickname',$nickname)->first()->code;
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    $stocks = ShareMarketGame\Share::where('code', '=', $stockCode)->get();
+    return view('history', compact('lists','stocks','lists3'));
 
 });
 

@@ -233,7 +233,7 @@
 
                     `)
                     document.getElementById("proceed1").style.display="block";
-                    @foreach ($lists3 as $list)
+                    @foreach ($lists3 as $lists)
                         //console.log("{{$list->nickname}}");
                             var exists = "{{$list->nickname}}";
                             if((document.getElementById('nname').value) == (exists)){

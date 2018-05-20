@@ -192,7 +192,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:200px">{{ Auth::user()->name }}
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" style="width:200px">
-                            <a class="dropdown-item" href="/programmingProject1/public/resetpassword">
+                            <a class="dropdown-item" href="/resetpassword">
                                 {{ __('Reset Password') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

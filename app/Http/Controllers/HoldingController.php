@@ -23,13 +23,17 @@ class HoldingController extends Controller
     		  //Set values
     		  $hold->trading_nickname=$name;
     		  $hold->asx_code=$code;
-    		  $hold->quantity=$amount;
+              $hold->quantity=$amount;
+              
+              $hold->save();
             }else{
                 //Set quantity
                 $hold->quantity=$hold->quantity+$amount;
+                $hold->update(['quantity'=>$hold->quantity]);
+
             }
     		//Save to database
-    		$hold->save();
+    		//$hold->save();
             //Record transaction
             $trans = new Transaction();
             $trans->nickname=$name;
@@ -41,7 +45,7 @@ class HoldingController extends Controller
             $trans->save();
             
             //redirect to the home page
-            return redirect('/home');
+            return redirect('/home')->with('success', 'Buy shares transaction success!');
     	}
     }
 }

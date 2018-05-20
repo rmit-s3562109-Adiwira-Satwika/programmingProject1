@@ -24,17 +24,19 @@ class SellingController extends Controller
 
     	//Return false if insufficient shares
     	if($amountheld<$amount){
-            return false;
+            return redirect('/home')->with('error', 'Error: Selling shares transaction failed. Please try again.');
         }
 
     	//Check if amount held equals sell amount and delete hold if so
     	if(TradingAccountController::removeFunds($name,$cost)){
-            $hold->delete();
-        }
-        //Reduce quantity by amount sold
-        else{
-            //Set values
-            $hold->update(['quantity'=>$amountheld-$amount]);
+            if($hold->quantity == $amount) {
+                $hold->delete();
+            }
+            //Reduce quantity by amount sold
+            else{
+                //Set values
+                $hold->update(['quantity'=>$amountheld-$amount]);
+            }
         }
 
     	//Increment trading account balance by sold value
@@ -50,6 +52,6 @@ class SellingController extends Controller
         $trans->purchase=false;
         $trans->save();
 
-    	return true;
+    	return redirect('/home')->with('success', 'Selling shares transaction success!');
     }
 }

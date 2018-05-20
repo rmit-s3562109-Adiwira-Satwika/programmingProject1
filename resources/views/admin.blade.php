@@ -6,7 +6,7 @@
 
     <div class="card">
         <h5 class="card-title">Inactive Users</h5>
-        <table>
+        <table class="table">
             <thead>
             <tr>
                 <th>Name</th>

@@ -38,13 +38,40 @@ Route::get('/delete', function () {
     return view('delete', compact('lists', 'lists2', 'lists3'));
 });
 
+Route::post('/trading_account/{nickname}', 'FriendController@sendFriendReq');
+
+Route::post('/accept', 'FriendController@acceptFriendReq');
+
 Route::get('/trading_account/{nickname}', function ($nickname) {
+    $session_id = Auth::user()->id;
+    $currName = $nickname;
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
     //$stockCode = DB::table('Transactions')->select('code')->where('nickname',$nickname)->get();
     $lists3 = ShareMarketGame\TradingAccount::all();
     $stocks = ShareMarketGame\Share::all();
     $lists2 = ShareMarketGame\Holding::where('trading_nickname', $nickname)->get();
-    return view('history', compact('lists', 'lists2', 'stocks', 'lists3'));
+    $lists8 = DB::table('friend_requests')->select('to')->where('from', '=', $nickname)->get();
+    $lists4 = DB::table('trading_accounts')->select('nickname')->where('user_id' , '!=', $session_id)
+    ->whereNotIn('nickname', function($query)
+    {
+        $query->select('friend')->from('friends');
+    })
+    ->whereNotIn('nickname', function($query)
+    {
+        $query->select('nickname')->from('friends');
+    })
+    ->whereNotIn('nickname',function($query)
+    {
+        $query->select('to')->from('friend_requests');
+    })
+    ->whereNotIn('nickname',function($query)
+    {
+        $query->select('from')->from('friend_requests');
+    })->get();
+    $lists5 = DB::table('friends')->where('nickname', $nickname)->get();
+    $lists6 = DB::table('friend_requests')->where('to', $nickname)->get();
+    $lists7 = DB::table('friends')->where('friend', $nickname)->get();
+    return view('history', compact('lists', 'lists2', 'stocks', 'lists3', 'lists4', 'lists5', 'currName', 'lists6', 'lists7'));
 
 });
 

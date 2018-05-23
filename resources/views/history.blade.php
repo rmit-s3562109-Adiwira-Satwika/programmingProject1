@@ -11,10 +11,168 @@
   overflow:auto;
   margin-top:20px;
 }
+#search-user-input{
+    border-top:thin solid  #e5e5e5;
+    border-right:thin solid #e5e5e5;
+    border-bottom:0;
+    border-left:thin solid  #e5e5e5;
+    box-shadow:0px 1px 1px 1px #e5e5e5;
+    height:40px;
+    margin:.8em 0 0 0em;
+    outline:0;
+    padding:.4em 0 .4em .6em;
+    width:440px;
+}
+.search1{
+    height: 35px;
+    width: 35px;
+}
+.imgIcon{
+    height: 28px;
+    width: 28px;
+    margin-left: 20px;
+}
 </style>
 @section('content')
 <body>
     <br>
+    <div class="card">
+        <div class="card-header">My Friends</div>
+        <div class="card-body">
+            <div>
+                <div class="card-deck">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Add Friends</h5>
+                            <div class="bar">
+                                <input type='text' placeholder='Find Existing Users...' id='search-user-input' name='search-user-input'>
+                                <img class="search1"
+                                    src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'>
+                                <div id="searchUserOutput"></div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function(){
+                                $(".search1").click(function(){
+                                    if((document.getElementById('search-user-input').value) != ""){
+                                    $('#searchUserOutput').html(`
+
+                                    `)
+                                    @foreach ($lists4 as $list)
+                                        var name = "{{$list->nickname}}";
+                                        if( ((name).toUpperCase().includes((document.getElementById('search-user-input').value).toUpperCase()) == true) ) {
+                                        $('#searchUserOutput').html(`
+                                            <br>
+                                            <table class="table table-striped table-sm">
+                                            <thead>
+                                                <tr>
+                                                <th>Nickname</th>
+                                                <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <form action="" method="post">
+                                                <tr>
+                                                <td><input type="hidden" id="usrName" name="usrName">{{$list->nickname}}</input></td>
+                                                <td><input type="hidden" id="currTradeAcc" name="currTradeAcc">{{$currName}}</input></td>
+                                                <td><button type="submit" class="btn btn-primary">Add</button></td>        
+                                                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                                                </tr>
+                                                </form>
+                                            </tbody>
+                                            </table>
+                                        `)
+                                        }
+                                    @endforeach
+                                        }else{
+                                        $('#searchUserOutput').html(`
+                                            <p><font color="red">Error: Invalid user. Please try again.</font></p>
+                                        `)
+                                        }
+                                });
+                                });
+                            </script>
+
+                            <div id="table-scroll">
+                                <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                    <th>Other Available Users</th>
+                                    <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                
+                                    @foreach ($lists4 as $list)
+                                    <tr>
+                                    <form action="/trading_account/{nickname}" method="post">
+                                        <td><input type="hidden" id="usrName" name="usrName" value="{{$list->nickname}}">{{$list->nickname}}</td>
+                                        <input type="hidden" id="currTradeAcc" name="currTradeAcc" value="{{$currName}}">
+                                        <td><button type="submit" class="btn btn-primary">Add</button></td>        
+                                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                                    </form>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">My Friends Lists</h5>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                    <th>Nickname</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($lists5 as $list)
+                                    <tr>
+                                        <td>{{$list->friend}}</td>
+                                    </tr>
+                                    @endforeach
+                                    @foreach($lists7 as $list2)
+                                    <tr>
+                                        <td>{{$list2->nickname}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">My Friends Requests</h5>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                    <th>Nickname</th>
+                                    <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($lists6 as $list)
+                                    <tr>
+                                        <form action="{{ action('FriendController@acceptFriendReq') }}" method="post">
+                                            <td><input type="hidden" id="fromUser" name="fromUser" value="{{$list->from}}">{{$list->from}}</td>
+                                            <input type="hidden" id="currUser" name="currUser" value="{{$currName}}">
+                                            <td><a href="/accept"><button type="submit" class="btn btn-success">Accept</button></a></td>
+                                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                                        </form>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <br><br><br>
     <div class="card">
         <div class="card-header">My Shares Inventory</div>
         <div class="card-body">

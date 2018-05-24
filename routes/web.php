@@ -29,7 +29,8 @@ Route::get('/home', function () {
     $lists = ShareMarketGame\Share::all();
     $lists2 = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $lists3 = ShareMarketGame\TradingAccount::all();
-    return view('home', compact('lists', 'lists2', 'lists3'));
+    $lists4 = ShareMarketGame\TradingAccount::where('user_id' , '!=', $session_id)->get();
+    return view('home', compact('lists', 'lists2', 'lists3', 'lists4'));
 });
 
 Route::post('/delete', 'TradingAccountController@deleteTradingAccount');
@@ -42,21 +43,49 @@ Route::get('/delete', function () {
     return view('delete', compact('lists', 'lists2', 'lists3'));
 });
 
+Route::post('/trading_account/{nickname}', 'FriendController@sendFriendReq');
+
+Route::post('/accept', 'FriendController@acceptFriendReq');
+
 Route::get('/trading_account/{nickname}', function ($nickname) {
+    $session_id = Auth::user()->id;
+    $currName = $nickname;
     $lists = DB::table('Transactions')->where('nickname',$nickname)->get();
-    $stockCode = DB::table('Transactions')->select('code')->where('nickname',$nickname)->first()->code;
+    //$stockCode = DB::table('Transactions')->select('code')->where('nickname',$nickname)->get();
     $lists3 = ShareMarketGame\TradingAccount::all();
-    $stocks = ShareMarketGame\Share::where('code', '=', $stockCode)->get();
-    return view('history', compact('lists','stocks','lists3'));
+    $stocks = ShareMarketGame\Share::all();
+    $lists2 = ShareMarketGame\Holding::where('trading_nickname', $nickname)->get();
+    $lists8 = DB::table('friend_requests')->select('to')->where('from', '=', $nickname)->get();
+    $lists4 = DB::table('trading_accounts')->select('nickname')->where('user_id' , '!=', $session_id)
+    ->whereNotIn('nickname', function($query)
+    {
+        $query->select('friend')->from('friends');
+    })
+    ->whereNotIn('nickname', function($query)
+    {
+        $query->select('nickname')->from('friends');
+    })
+    ->whereNotIn('nickname',function($query)
+    {
+        $query->select('to')->from('friend_requests');
+    })
+    ->whereNotIn('nickname',function($query)
+    {
+        $query->select('from')->from('friend_requests');
+    })->get();
+    $lists5 = DB::table('friends')->where('nickname', $nickname)->get();
+    $lists6 = DB::table('friend_requests')->where('to', $nickname)->get();
+    $lists7 = DB::table('friends')->where('friend', $nickname)->get();
+    return view('history', compact('lists', 'lists2', 'stocks', 'lists3', 'lists4', 'lists5', 'currName', 'lists6', 'lists7'));
 
 });
 
 Route::get('/home/{code}', function ($code) {
-    $session_id =  \Auth::user()->id;
+    $session_id = Auth::user()->id;
     $accounts = ShareMarketGame\TradingAccount::where('user_id' , '=', $session_id)->get();
     $list = DB::table('shares')->where('code',$code)->first();
     $lists3 = ShareMarketGame\TradingAccount::all();
-    $stock = ShareMarketGame\Holding::all();
+    $stock = DB::table('holdings')->get();
     #$stock = ShareMarketGame\Holding::where('trading_nickname', $accounts->nickname)->first();
     return view('dashboard.show', compact('list', 'lists3', 'accounts', 'stock'));
 
@@ -72,7 +101,8 @@ Route::get('/nickname', function () {
 Route::post('/nickname', 'TradingAccountController@changeNickname');
 
 Route::get('/resetpassword', function () {
-    return view('auth.passwords.email');
+    $lists3 = ShareMarketGame\TradingAccount::all();
+    return view('auth.passwords.email', compact('lists3'));
 });
 
 Route::get('/reg-tradeaccount', function () {

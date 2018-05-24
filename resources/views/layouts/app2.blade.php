@@ -192,7 +192,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:200px">{{ Auth::user()->name }}
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" style="width:200px">
-                            <a class="dropdown-item" href="/programmingProject1/public/resetpassword">
+                            <a class="dropdown-item" href="/resetpassword">
                                 {{ __('Reset Password') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -233,15 +233,14 @@
 
                     `)
                     document.getElementById("proceed1").style.display="block";
-                    @foreach ($lists3 as $lists)
-                        //console.log("{{$list->nickname}}");
-                            var exists = "{{$list->nickname}}";
-                            if((document.getElementById('nname').value) == (exists)){
-                                $('#response').html(`
-                                    <h5><font color="red">Error: Nickname already exists in database. Please enter a new nickname.</font></h5>
-                                `)
-                                document.getElementById("proceed1").style.display="none";
-                            }
+                    @foreach ($lists3 as $list)
+                        var exists = "{{$list->nickname}}";
+                        if((document.getElementById('nname').value) == (exists)){
+                            $('#response').html(`
+                                <h5><font color="red">Error: Nickname already exists in database. Please enter a new nickname.</font></h5>
+                            `)
+                            document.getElementById("proceed1").style.display="none";
+                        }
                     @endforeach
                 }else{
                     $('#response').html(`

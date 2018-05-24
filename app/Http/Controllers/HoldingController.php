@@ -1,7 +1,5 @@
 <?php
-
 namespace ShareMarketGame\Http\Controllers;
-
 use Illuminate\Http\Request;
 use ShareMarketGame\Share;
 use ShareMarketGame\Holding;
@@ -15,10 +13,8 @@ class HoldingController extends Controller
         $amount=$request->input('amount');
     	//Retrieve cost of shares
     	$cost=(Share::find($code)->value)*$amount;
-
     	//Check if user can afford and remove funds if so
     	if(TradingAccountController::removeFunds($name,$cost)){
-
             $hold=Holding::where('trading_nickname', $name)->where('asx_code', $code)->first();
             if($hold==null){
     		  //Create holding
@@ -27,15 +23,17 @@ class HoldingController extends Controller
     		  //Set values
     		  $hold->trading_nickname=$name;
     		  $hold->asx_code=$code;
-    		  $hold->quantity=$amount;
+              $hold->quantity=$amount;
+              
+              $hold->save();
             }else{
                 //Set quantity
                 $hold->quantity=$hold->quantity+$amount;
+                $hold->update(['quantity'=>$hold->quantity]);
 
             }
     		//Save to database
-    		$hold->save();
-
+    		//$hold->save();
             //Record transaction
             $trans = new Transaction();
             $trans->nickname=$name;
@@ -45,14 +43,9 @@ class HoldingController extends Controller
             $trans->dateTime=date('Y-m-d H:i:s');
             $trans->purchase=true;
             $trans->save();
-
             
             //redirect to the home page
-            return redirect('/home');
-
+            return redirect('/home')->with('success', 'Buy shares transaction success!');
     	}
     }
-
-
-
 }

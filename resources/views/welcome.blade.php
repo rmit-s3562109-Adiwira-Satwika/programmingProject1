@@ -35,7 +35,7 @@
                 z-index: 1;      
                 width: 100%;
                 height: auto;
-                background-image: url("http://www.aceinvestmentadvisory.com/images/services/ace_img/stock-market-18.png");
+                background-image: url("aceinvestmentadvisory.com/wp-content/uploads/2018/05/Intraday-tips-and-strategies.jpg");
                 background-size: cover;
                 opacity: 0.3;
             }
@@ -113,7 +113,7 @@
 
                     <div class="content">
                         <div class="title m-b-md">
-                            Budding Share Market Investor
+                            Investor Ready
                         </div>
 
                         <div class="links">

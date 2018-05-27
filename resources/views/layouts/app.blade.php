@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ ('Budding Share Market Investor') }}
+                {{ ('Investor Ready') }}
             </a>
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

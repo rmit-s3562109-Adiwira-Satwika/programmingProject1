@@ -10,6 +10,8 @@ use ShareMarketGame\Transaction;
 class sellController extends Controller
 {
     public function sellShares(Request $request){
+
+        //Handle request
         $name=$request->input('name');
         $code=$request->input('code');
         $amount=$request->input('amount');
@@ -48,6 +50,8 @@ class sellController extends Controller
         $trans->value=$cost;
         $trans->dateTime=date('Y-m-d H:i:s');
         $trans->purchase=false;
+
+        //Save transaction
         $trans->save();
 
     	return true;

@@ -51,7 +51,7 @@ class sellController extends Controller
         $trans->dateTime=date('Y-m-d H:i:s');
         $trans->purchase=false;
 
-        //Save transaction
+        //Save transaction to database
         $trans->save();
 
     	return true;

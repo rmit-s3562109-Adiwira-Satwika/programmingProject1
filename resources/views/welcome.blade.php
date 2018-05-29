@@ -68,7 +68,7 @@
             }
 
             .content {
-                left: 90px;
+                margin-left: -25%;
                 position: fixed;
                 top: 20%;
                 text-align: center;

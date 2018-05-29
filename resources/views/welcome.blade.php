@@ -35,7 +35,7 @@
                 z-index: 1;      
                 width: 100%;
                 height: auto;
-                background-image: url("aceinvestmentadvisory.com/wp-content/uploads/2018/05/Intraday-tips-and-strategies.jpg");
+                background-image: url("http://aceinvestmentadvisory.com/wp-content/uploads/2018/05/Intraday-tips-and-strategies.jpg");
                 background-size: cover;
                 opacity: 0.3;
             }
@@ -68,8 +68,9 @@
             }
 
             .content {
+                left: 90px;
                 position: fixed;
-                top: 50%;
+                top: 20%;
                 text-align: center;
             }
 

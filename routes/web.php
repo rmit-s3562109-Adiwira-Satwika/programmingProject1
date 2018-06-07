@@ -105,6 +105,7 @@ Route::get('/resetpassword', function () {
     return view('auth.passwords.email', compact('lists3'));
 });
 
+
 Route::get('/reg-tradeaccount', function () {
     $lists = ShareMarketGame\Share::all();
     return view('tradeAccount', compact('lists'));

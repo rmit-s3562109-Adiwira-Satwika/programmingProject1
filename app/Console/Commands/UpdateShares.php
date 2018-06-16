@@ -45,6 +45,7 @@ class UpdateShares extends Command
                 $share->save();
             }catch(\Exception $e){
                 //Try second time on failed update
+                sleep(30);
                 try{
                     $share->value=UpdateShares::getShareValue($share->code);
                     $share->save();
